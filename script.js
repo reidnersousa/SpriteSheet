@@ -6,8 +6,19 @@ this.load.image('chao', 'assets/chao.png');
 }
 
 function create() {
+  //===============================
+
+  const plataformas = this.physics.add.staticGroup();
+  let plataforma1 = plataformas.create(250, 380, 'chao');
+  plataforma1.setScale(1).refreshBody();
+
+  let plataforma2 = plataformas.create(90, 380, 'chao');
+  plataforma2.setScale(1).refreshBody();
+
   
 
+
+  //================================
   
   const chao = this.physics.add.staticImage(420, 380, 'chao');
   
@@ -20,7 +31,7 @@ function create() {
 
   this.physics.add.collider(personagem, chao);
 
-
+  this.physics.add.collider(plataformas, personagem);
  
   this.anims.create({
         key : 'parado',
@@ -111,7 +122,7 @@ const config = {
     type: Phaser.AUTO, // Canva ou WebGL
     width: 600,
     height: 400,
-    backgroundColor: '#FF0FF',
+    backgroundColor: '#F9F9F9',
     autoCenter : Phaser.Scale.CENTER_BOTH,
     physics: {
         default: 'arcade',
