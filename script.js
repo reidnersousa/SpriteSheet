@@ -6,15 +6,14 @@ this.load.image('chao', 'assets/chao.png');
 }
 
 function create() {
+  
 
-  const chao = this.physics.add.staticImage(420, 370, 'chao');
+  
+  const chao = this.physics.add.staticImage(420, 380, 'chao');
   
   chao.body.setSize(129, 46, 0, 0)
   this.physics.add.collider(chao,personagem );
 
-  
-
-  
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
 
   personagem.setCollideWorldBounds(true);
@@ -56,14 +55,7 @@ function create() {
 
      
   this.personagem = personagem;
-// =====================================================  
-    //this.w = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W)
-    //this.a = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A)
-    //this.s = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S)
-    //this.d = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D)
 
-    //this.player = this.physics.add.image(config.width / 2, config.height / 2, 'player').setScale(0.25, 0.25);
-    //this.player.setCollideWorldBounds(true);
 }
 
 function update() {
@@ -82,11 +74,28 @@ function update() {
 
     }
     else if(cursors.up.isDown){
-       personagem.setVelocityY(-160);
-       
-       setTimeout(() => {personagem.setVelocityY(180);},1000);
+      
+      personagem.setVelocityY(-160);
+    }   
+    else if (cursors.space.isDown && personagem.body.onFloor()) {
+      
+      // primeiro pulo
+      personagem.setVelocityY(-300);
+     
+      if (cursors.space.isDown &&  personagem.jumpCount < 2)     {
+      // segundo pulo
         
-      }
+        personagem.setVelocityY(-400);
+        console.log("Entrei no segundo espaço");
+        personagem.jumpCount++;
+      } 
+
+      
+    } 
+
+
+
+      
     else
     { 
     personagem.setVelocityX(0);
@@ -102,13 +111,13 @@ const config = {
     type: Phaser.AUTO, // Canva ou WebGL
     width: 600,
     height: 400,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#FF0FF',
     autoCenter : Phaser.Scale.CENTER_BOTH,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: {
-                y: 0
+                y: 500
             },
             debug: true
         }
