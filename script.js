@@ -2,16 +2,25 @@ function preload() {
  
  
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47 });
- 
+this.load.image('chao', 'assets/chao.png'); 
 }
 
 function create() {
-  
-      
 
+  const chao = this.physics.add.staticImage(420, 370, 'chao');
+  
+  chao.body.setSize(129, 46, 0, 0)
+  this.physics.add.collider(chao,personagem );
+
+  
+
+  
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
 
   personagem.setCollideWorldBounds(true);
+
+  this.physics.add.collider(personagem, chao);
+
 
  
   this.anims.create({
