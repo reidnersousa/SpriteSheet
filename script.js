@@ -3,26 +3,40 @@ function preload() {
  
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47 });
 this.load.image('chao', 'assets/chao.png'); 
+this.load.image('fundo', 'assets/MarteFundo.png'); 
+
 }
 
 function create() {
   //===============================
-
+  this.add.image(200,350,'fundo').setScale(1.8);
+ // fundo.setSize(1.5);
+  
   const plataformas = this.physics.add.staticGroup();
-  let plataforma1 = plataformas.create(250, 380, 'chao');
+  let plataforma1 = plataformas.create(270, 380, 'chao');
   plataforma1.setScale(1).refreshBody();
 
-  let plataforma2 = plataformas.create(90, 380, 'chao');
+  let plataforma2 = plataformas.create(62, 380, 'chao');
   plataforma2.setScale(1).refreshBody();
+
+  let plataforma3 = plataformas.create(62, 200, 'chao');
+  plataforma3.setScale(1).refreshBody();
+
+  let plataforma4 = plataformas.create(525, 340, 'chao');
+  
+  plataforma4.setSize(5, 5).setScale(1).refreshBody();
+
+
+  
 
   
 
 
   //================================
   
-  const chao = this.physics.add.staticImage(420, 380, 'chao');
+  const chao = this.physics.add.staticImage(397, 380, 'chao');
   
-  chao.body.setSize(129, 46, 0, 0)
+  chao.body.setSize(129, 46, 0, 0);
   this.physics.add.collider(chao,personagem );
 
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
@@ -59,6 +73,14 @@ function create() {
         repeat : -1
       });
 
+  this.anims.create({
+        key : 'pulo',
+        
+        frames : this.anims.generateFrameNumbers('personagem', { start : 21, end : 23}),
+        frameRate: 120,
+        repeat : 1
+      });
+
 
   
    
@@ -87,10 +109,15 @@ function update() {
     else if(cursors.up.isDown){
       
       personagem.setVelocityY(-160);
-    }   
+    }
+    else if(cursors.down.isDown){
+      personagem.setVelocity(0);
+    }
     else if (cursors.space.isDown && personagem.body.onFloor()) {
       
       // primeiro pulo
+      console.log("Primeiro pulo ");
+      personagem.anims.play('pulo', true);
       personagem.setVelocityY(-300);
      
       if (cursors.space.isDown &&  personagem.jumpCount < 2)     {
@@ -109,8 +136,9 @@ function update() {
       
     else
     { 
-    personagem.setVelocityX(0);
-    personagem.anims.play('parado',false);
+      personagem.setVelocityX(0);
+      //console.log('AAA');
+      personagem.anims.play('parado',false);
     }
     //if ((cursors.left.isDown || this.a.isDown) || (cursors.right.isDown || this.d.isDown)) this.player.setVelocityX(cursors.left.isDown || this.a.isDown ? -160 : 160);
     //else this.player.setVelocityX(0);
