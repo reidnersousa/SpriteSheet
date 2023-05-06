@@ -7,6 +7,21 @@ this.load.image('fundo', 'assets/MarteFundo.png');
 this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:17});
 }
 
+function matarVox(personagem, vox) {
+  
+  // Verifica se o personagem está em uma posição vertical superior ao vox
+  console.log("personagem body.y+personagem.body",personagem.body.y+personagem.body.height);
+  console.log("vox.body.y",vox.body.y);
+  console.log("personagem.body.y",personagem.body.y);
+  console.log("personagem.body.height",personagem.body.height);
+  if (personagem.body.y + personagem.body.height < vox.body.y) {
+    // Código para "matar" o vox
+    vox.disableBody(true, true);
+    console.log("Vox morto");
+  }
+}
+
+
 function create() {
  
   this.add.image(620,300,'fundo').setScale(3.0);
@@ -56,9 +71,9 @@ function create() {
   this.physics.add.collider(plataformas, personagem);
 
   //======
-  var vox = this.physics.add.sprite(200, 350, 'vox');
+  var vox = this.physics.add.sprite(300, 350, 'vox');
   vox.setCollideWorldBounds(true);
- // this.physics.add.overlap(personagem, vox, matarVox, null, this);
+  this.physics.add.overlap(personagem, vox, matarVox, null, this);
 
   this.physics.add.collider(plataformas,vox);
   
@@ -106,6 +121,7 @@ function create() {
 
      
   this.personagem = personagem;
+
 
 }
 
@@ -163,6 +179,9 @@ function update() {
     //if ((cursors.up.isDown || this.w.isDown) || (cursors.down.isDown || this.s.isDown)) this.player.setVelocityY(cursors.up.isDown || this.w.isDown ? -160 : 160);
     //else this.player.setVelocityY(0);
 }
+
+
+
 
 const config = {
     type: Phaser.AUTO, // Canva ou WebGL
