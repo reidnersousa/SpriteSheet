@@ -4,11 +4,11 @@ function preload() {
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47 });
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('fundo', 'assets/MarteFundo.png'); 
-this.load.image('vox','assets/1.png');
+this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:17});
 }
 
 function create() {
-  //===============================
+ 
   this.add.image(620,300,'fundo').setScale(3.0);
  // fundo.setSize(1.5);
   
@@ -49,13 +49,22 @@ function create() {
   
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
   
-
   personagem.setCollideWorldBounds(true);
 
   this.physics.add.collider(personagem, chao);
 
   this.physics.add.collider(plataformas, personagem);
- 
+
+  //======
+  var vox = this.physics.add.sprite(200, 350, 'vox');
+  vox.setCollideWorldBounds(true);
+ // this.physics.add.overlap(personagem, vox, matarVox, null, this);
+
+  this.physics.add.collider(plataformas,vox);
+  
+
+  this.vox = vox;
+ //=========
   this.anims.create({
         key : 'parado',
         frames : this.anims.generateFrameNumbers('personagem', { start : 1, end : 3}),
