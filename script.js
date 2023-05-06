@@ -4,12 +4,12 @@ function preload() {
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47 });
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('fundo', 'assets/MarteFundo.png'); 
-
+this.load.image('vox','assets/1.png');
 }
 
 function create() {
   //===============================
-  this.add.image(200,350,'fundo').setScale(1.8);
+  this.add.image(620,300,'fundo').setScale(3.0);
  // fundo.setSize(1.5);
   
   const plataformas = this.physics.add.staticGroup();
@@ -22,9 +22,17 @@ function create() {
   let plataforma3 = plataformas.create(62, 200, 'chao');
   plataforma3.setScale(1).refreshBody();
 
-  let plataforma4 = plataformas.create(525, 340, 'chao');
-  
+  let plataforma4 = plataformas.create(405, 200, 'chao');
   plataforma4.setSize(5, 5).setScale(1).refreshBody();
+
+  let plataforma5 = plataformas.create(562, 300, 'chao');
+  plataforma5.setScale(1).refreshBody();
+
+  let plataforma6 = plataformas.create(690, 300, 'chao');
+  plataforma6.setScale(1).refreshBody();
+
+  let plataforma7 = plataformas.create(690, 252, 'chao');
+  plataforma7.setScale(1).refreshBody();
 
 
   
@@ -38,8 +46,9 @@ function create() {
   
   chao.body.setSize(129, 46, 0, 0);
   this.physics.add.collider(chao,personagem );
-
+  
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
+  
 
   personagem.setCollideWorldBounds(true);
 
@@ -148,9 +157,9 @@ function update() {
 
 const config = {
     type: Phaser.AUTO, // Canva ou WebGL
-    width: 600,
+    width: 1200,
     height: 400,
-    backgroundColor: '#F9F9F9',
+    backgroundColor: '#FFF',
     autoCenter : Phaser.Scale.CENTER_BOTH,
     physics: {
         default: 'arcade',
