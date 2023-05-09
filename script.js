@@ -2,7 +2,8 @@ function preload() {
  
  
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47 });
-//this.load.spritesheet('personagem','assets/certo.png', { frameWidth:32.8, frameHeight:47 });
+
+
 
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('fundo', 'assets/MarteFundo.png'); 
@@ -10,18 +11,22 @@ this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:17});
 }
 
 function matarVox(personagem, vox) {
+
   
-  if (personagem.body.touching.down && personagem.body.y  <= vox.body.y) {
+ 
+   
+  
+  if (personagem.body.touching.left && personagem.body.x + personagem.body.height >= vox.body.x  ||       
+           personagem.body.touching.right && personagem.body.x + personagem.body.height >= vox.body.x){
+   
+        personagem.disableBody(true, true);
+        console.log("Personagem morto");
+   
+  }
+  else if (personagem.body.touching.down && personagem.body.y  <= vox.body.y) {
   
     vox.disableBody(true, true);
     console.log("Vox morto");
-   
-  }
-  
-  else if (personagem.body.touching.left && personagem.body.x + personagem.body.height >= vox.body.x  || personagem.body.touching.right && personagem.body.x + personagem.body.height >= vox.body.x){
-   
-    personagem.disableBody(true, true);
-    console.log("Personagem morto");
    
   }
 }
@@ -32,7 +37,7 @@ function matarVox(personagem, vox) {
 function create() {
  
   this.add.image(620,300,'fundo').setScale(3.0);
- // fundo.setSize(1.5);
+
   
   const plataformas = this.physics.add.staticGroup();
   let plataforma1 = plataformas.create(270, 380, 'chao');
@@ -60,32 +65,29 @@ function create() {
   
 
   
-
+ 
 
 
   
   const chao = this.physics.add.staticImage(397, 380, 'chao');
-  
   chao.body.setSize(129, 46, 0, 0);
   this.physics.add.collider(chao,personagem );
   
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
-  
   personagem.setCollideWorldBounds(true);
 
   this.physics.add.collider(personagem, chao);
-
   this.physics.add.collider(plataformas, personagem);
 
   
   var vox = this.physics.add.sprite(300, 350, 'vox');
   vox.setCollideWorldBounds(true);
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
-
   this.physics.add.collider(plataformas,vox);
+  this.vox = vox;
+
   
 
-  this.vox = vox;
  
   this.anims.create({
         key : 'parado',
@@ -133,6 +135,9 @@ function create() {
 }
 
 function update() {
+
+    
+  
     let cursors = this.input.keyboard.createCursorKeys();
     var personagem = this.personagem;
     
@@ -140,11 +145,13 @@ function update() {
        personagem.setVelocityX(-160);
        personagem.anims.play('esquerda', true);
        personagem.flipX = true;
+       
 
     } else if(cursors.right.isDown){
        personagem.setVelocityX(160);
        personagem.anims.play('direita', true);
        personagem.flipX = false;
+       
 
     }
     else if(cursors.up.isDown){
@@ -180,7 +187,12 @@ function update() {
       personagem.setVelocityX(0);
       //console.log('AAA');
       personagem.anims.play('parado',false);
+      
     }
+
+    
+
+    
     //if ((cursors.left.isDown || this.a.isDown) || (cursors.right.isDown || this.d.isDown)) this.player.setVelocityX(cursors.left.isDown || this.a.isDown ? -160 : 160);
     //else this.player.setVelocityX(0);
     //if ((cursors.up.isDown || this.w.isDown) || (cursors.down.isDown || this.s.isDown)) this.player.setVelocityY(cursors.up.isDown || this.w.isDown ? -160 : 160);
