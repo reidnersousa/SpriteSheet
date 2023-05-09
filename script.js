@@ -2,6 +2,8 @@ function preload() {
  
  
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47 });
+//this.load.spritesheet('personagem','assets/certo.png', { frameWidth:32.8, frameHeight:47 });
+
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('fundo', 'assets/MarteFundo.png'); 
 this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:17});
@@ -9,17 +11,22 @@ this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:17});
 
 function matarVox(personagem, vox) {
   
-  // Verifica se o personagem está em uma posição vertical superior ao vox
-  console.log("personagem body.y+personagem.body",personagem.body.y+personagem.body.height);
-  console.log("vox.body.y",vox.body.y);
-  console.log("personagem.body.y",personagem.body.y);
-  console.log("personagem.body.height",personagem.body.height);
-  if (personagem.body.y + personagem.body.height < vox.body.y) {
-    // Código para "matar" o vox
+  if (personagem.body.touching.down && personagem.body.y  <= vox.body.y) {
+  
     vox.disableBody(true, true);
     console.log("Vox morto");
+   
+  }
+  
+  else if (personagem.body.touching.left && personagem.body.x + personagem.body.height >= vox.body.x  || personagem.body.touching.right && personagem.body.x + personagem.body.height >= vox.body.x){
+   
+    personagem.disableBody(true, true);
+    console.log("Personagem morto");
+   
   }
 }
+
+
 
 
 function create() {
@@ -55,7 +62,7 @@ function create() {
   
 
 
-  //================================
+
   
   const chao = this.physics.add.staticImage(397, 380, 'chao');
   
@@ -70,7 +77,7 @@ function create() {
 
   this.physics.add.collider(plataformas, personagem);
 
-  //======
+  
   var vox = this.physics.add.sprite(300, 350, 'vox');
   vox.setCollideWorldBounds(true);
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
@@ -79,7 +86,7 @@ function create() {
   
 
   this.vox = vox;
- //=========
+ 
   this.anims.create({
         key : 'parado',
         frames : this.anims.generateFrameNumbers('personagem', { start : 1, end : 3}),
@@ -187,7 +194,7 @@ const config = {
     type: Phaser.AUTO, // Canva ou WebGL
     width: 1200,
     height: 400,
-    backgroundColor: '#FFF',
+    backgroundColor: '##000',
     autoCenter : Phaser.Scale.CENTER_BOTH,
     physics: {
         default: 'arcade',
