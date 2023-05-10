@@ -1,17 +1,17 @@
 function preload() {
  
  
-this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47 });
+this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
 
 
 
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('fundo', 'assets/MarteFundo.png'); 
-this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:17});
+this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:16});
 }
 
 var qtdChamadas = 0;
-
+var personagemVivo=true;
 
 function matarVox(personagem, vox) {
 
@@ -23,6 +23,7 @@ function matarVox(personagem, vox) {
            personagem.body.touching.right && personagem.body.x + personagem.body.height >= vox.body.x){
    
         personagem.disableBody(true, true);
+        personagemVivo =false;
         console.log("Personagem morto");
    
   }
@@ -77,17 +78,21 @@ function create() {
   this.physics.add.collider(chao,personagem );
   
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
-  personagem.setCollideWorldBounds(true);
+//  personagem.setCollideWorldBounds(true);
 
   this.physics.add.collider(personagem, chao);
   this.physics.add.collider(plataformas, personagem);
 
   
   var vox = this.physics.add.sprite(300, 350, 'vox');
+  
   vox.setCollideWorldBounds(true);
+  vox.body.setSize(0,0,0,40);
   this.physics.add.collider(chao,vox);
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
   this.physics.add.collider(plataformas,vox);
+  
+  
   this.vox = vox;
 
   
@@ -135,17 +140,30 @@ function create() {
      
   this.personagem = personagem;
 
+  this.anims.create({
+        key : 'vox_esquerda',
+        frames : this.anims.generateFrameNumbers('vox', { start : 4, end : 8}),
+        frameRate: 15,
+        repeat : -1
+      });
 
+  this.anims.create({
+        key : 'vox_direita',
+        frames : this.anims.generateFrameNumbers('vox', { start : 8, end : 15}),
+        frameRate: 15,
+        repeat : -1
+      });
+  
 }
 
 
 
 function voxMovimentosDireita(vox){
   
-  vox.setVelocityX(100);
+  vox.setVelocityX(45);
   qtdChamadas++;
   
-  if(qtdChamadas == 20){
+  if(qtdChamadas == 50){
     escolha =true;
   }
   
@@ -154,10 +172,10 @@ function voxMovimentosDireita(vox){
 
 function voxMovimentosEsquerda(vox){
   
-  vox.setVelocityX(-100);
+  vox.setVelocityX(-45);
   qtdChamadas--;
   
-  if(qtdChamadas == 1){
+  if(qtdChamadas == -50){
     escolha =false;
   }
   
@@ -167,7 +185,7 @@ function voxMovimentosEsquerda(vox){
 var escolha =false;
 
 function update() {
-
+    
     
   
     let cursors = this.input.keyboard.createCursorKeys();
@@ -176,12 +194,14 @@ function update() {
     var vox = this.vox;
 
     if (escolha == false){
-      console.log(qtdChamadas);
+     
       voxMovimentosDireita(vox);
+      vox.anims.play('vox_direita');
     }
     
     if (escolha == true){ 
       voxMovimentosEsquerda(vox);
+      vox.anims.play('vox_esquerda');
     }
     
     if(cursors.left.isDown){
@@ -202,7 +222,7 @@ function update() {
       personagem.setVelocityY(-160);
     
       
-      //setTimeout(tempoDeRecargaFoquete(personagem),500);
+      
     }
     else if(cursors.down.isDown){
       personagem.setVelocity(0);
@@ -231,13 +251,21 @@ function update() {
     else
     { 
       personagem.setVelocityX(0);
-      //console.log('AAA');
+      
       personagem.anims.play('parado',false);
       
     }
 
+
+    if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R).isDown && personagemVivo === false){
+      console.log("Reviver");
+    
+      personagem.enableBody(true, 100, 330, true, true);
+    }
     
 
+    
+    
     
     //if ((cursors.left.isDown || this.a.isDown) || (cursors.right.isDown || this.d.isDown)) this.player.setVelocityX(cursors.left.isDown || this.a.isDown ? -160 : 160);
     //else this.player.setVelocityX(0);
