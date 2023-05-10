@@ -10,6 +10,9 @@ this.load.image('fundo', 'assets/MarteFundo.png');
 this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:17});
 }
 
+var qtdChamadas = 0;
+
+
 function matarVox(personagem, vox) {
 
   
@@ -82,6 +85,7 @@ function create() {
   
   var vox = this.physics.add.sprite(300, 350, 'vox');
   vox.setCollideWorldBounds(true);
+  this.physics.add.collider(chao,vox);
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
   this.physics.add.collider(plataformas,vox);
   this.vox = vox;
@@ -134,18 +138,57 @@ function create() {
 
 }
 
+
+
+function voxMovimentosDireita(vox){
+  
+  vox.setVelocityX(100);
+  qtdChamadas++;
+  
+  if(qtdChamadas == 20){
+    escolha =true;
+  }
+  
+}
+
+
+function voxMovimentosEsquerda(vox){
+  
+  vox.setVelocityX(-100);
+  qtdChamadas--;
+  
+  if(qtdChamadas == 1){
+    escolha =false;
+  }
+  
+  
+}
+
+var escolha =false;
+
 function update() {
 
     
   
     let cursors = this.input.keyboard.createCursorKeys();
     var personagem = this.personagem;
+
+    var vox = this.vox;
+
+    if (escolha == false){
+      console.log(qtdChamadas);
+      voxMovimentosDireita(vox);
+    }
+    
+    if (escolha == true){ 
+      voxMovimentosEsquerda(vox);
+    }
     
     if(cursors.left.isDown){
        personagem.setVelocityX(-160);
        personagem.anims.play('esquerda', true);
        personagem.flipX = true;
-       
+       vox.setVelocityX(-160);
 
     } else if(cursors.right.isDown){
        personagem.setVelocityX(160);
@@ -154,9 +197,12 @@ function update() {
        
 
     }
-    else if(cursors.up.isDown){
+    else if(cursors.up.isDown && personagem.body.onFloor()){
       
       personagem.setVelocityY(-160);
+    
+      
+      //setTimeout(tempoDeRecargaFoquete(personagem),500);
     }
     else if(cursors.down.isDown){
       personagem.setVelocity(0);
