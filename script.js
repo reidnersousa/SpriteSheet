@@ -1,11 +1,9 @@
 function preload() {
  
- 
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
 
-
-
 this.load.image('chao', 'assets/chao.png'); 
+this.load.image('bandeira', 'assets/bandeira.png'); 
 this.load.image('fundo', 'assets/MarteFundo.png'); 
 this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:16});
 }
@@ -13,13 +11,12 @@ this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:16});
 var qtdChamadas = 0;
 var personagemVivo=true;
 
-function matarVox(personagem, vox) {
 
-  
+function matarVox(personagem, vox) {
  
    
   
-  if (personagem.body.touching.left && personagem.body.x + personagem.body.height >= vox.body.x  ||       
+if (personagem.body.touching.left && personagem.body.x + personagem.body.height >= vox.body.x  ||       
            personagem.body.touching.right && personagem.body.x + personagem.body.height >= vox.body.x){
    
         personagem.disableBody(true, true);
@@ -35,7 +32,101 @@ function matarVox(personagem, vox) {
   }
 }
 
+/*
+function update_2() {
+  this.anims.create({
+        key : 'parado',
+        frames : this.anims.generateFrameNumbers('personagem', { start : 1, end : 3}),
+        frameRate: 2,
+        repeat : -1
+      });
 
+  this.anims.create({
+        key : 'direita',
+        frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
+        frameRate: 10,
+        repeat : -1
+      });
+
+
+  
+   this.anims.create({
+        
+
+        key : 'esquerda',
+        flipX :true,
+        frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
+        frameRate: 10,
+        repeat : -1
+      });
+
+  this.anims.create({
+        key : 'pulo',
+        
+        frames : this.anims.generateFrameNumbers('personagem', { start : 21, end : 23}),
+        frameRate: 120,
+        repeat : 1
+      });
+
+
+  
+   
+
+
+     
+  this.personagem = personagem;
+
+  this.anims.create({
+        key : 'vox_esquerda',
+        frames : this.anims.generateFrameNumbers('vox', { start : 4, end : 8}),
+        frameRate: 15,
+        repeat : -1
+      });
+
+  this.anims.create({
+        key : 'vox_direita',
+        frames : this.anims.generateFrameNumbers('vox', { start : 8, end : 15}),
+        frameRate: 15,
+        repeat : -1
+      });
+  
+}
+}
+*/
+
+function create_2() {
+  this.add.image(620, 300, 'fundo').setScale(3.0);
+
+  const plataformas = this.physics.add.staticGroup();
+
+  let plataforma1 = plataformas.create(270, 380, 'chao');
+  plataforma1.setScale(1).refreshBody();
+
+  let plataforma2 = plataformas.create(62, 380, 'chao');
+  plataforma2.setScale(1).refreshBody();
+
+  let plataforma3 = plataformas.create(62, 200, 'chao');
+  plataforma3.setScale(1).refreshBody();
+
+  let plataforma4 = plataformas.create(405, 200, 'chao');
+  plataforma4.setSize(5, 5).setScale(1).refreshBody();
+
+  let plataforma5 = plataformas.create(562, 300, 'chao');
+  plataforma5.setScale(1).refreshBody();
+
+  let plataforma6 = plataformas.create(690, 300, 'chao');
+  plataforma6.setScale(1).refreshBody();
+
+  let plataforma7 = plataformas.create(690, 252, 'chao');
+  plataforma7.setScale(1).refreshBody();
+
+  let plataforma8 = plataformas.create(830, 252, 'chao');
+  plataforma8.setScale(1).refreshBody();
+
+  let plataforma9 = plataformas.create(1030, 262, 'chao');
+  plataforma9.setScale(1).refreshBody();
+
+}
 
 
 function create() {
@@ -65,17 +156,18 @@ function create() {
   let plataforma7 = plataformas.create(690, 252, 'chao');
   plataforma7.setScale(1).refreshBody();
 
+  let plataforma8 = plataformas.create(830, 252, 'chao');
+  plataforma8.setScale(1).refreshBody();
 
-  
-
-  
+  let plataforma9 = plataformas.create(1030, 262, 'chao');
+  plataforma9.setScale(1).refreshBody();
  
-
 
   
   const chao = this.physics.add.staticImage(397, 380, 'chao');
   chao.body.setSize(129, 46, 0, 0);
   this.physics.add.collider(chao,personagem );
+  
   
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
 //  personagem.setCollideWorldBounds(true);
@@ -153,6 +245,43 @@ function create() {
         frameRate: 15,
         repeat : -1
       });
+
+var pontuacao = 0;
+var pontuacaoTextBandeira = this.add.text(16, 16, 'Pontuação: 0', { fontSize: '32px', fill: '#000' });
+
+// Função chamada quando o personagem colide com a bandeira
+function coletarBandeira(personagem, bandeira) {
+  // Incrementa a pontuação
+  pontuacao += 100;
+  pontuacaoTextBandeira.setText('Pontuação: ' + pontuacao);
+  
+  // Remova a bandeira do jogo
+  bandeira.destroy();
+}
+
+// Criação da bandeira
+  var bandeira = this.physics.add.staticImage(900, 200, 'bandeira');
+  bandeira.setScale(0.2); // Ajusta o tamanho da bandeira
+  bandeira.setScale(bandeira.scaleX * 0.2); // Diminui a escala atual em 5 vezes
+
+
+// Define a posição e o tamanho da hitbox da bandeira
+var hitboxWidth = bandeira.width * bandeira.scaleX;
+var hitboxHeight = bandeira.height * bandeira.scaleY;
+bandeira.body.setSize(hitboxWidth, hitboxHeight);
+bandeira.body.setOffset((bandeira.width - hitboxWidth) / 2, (bandeira.height - hitboxHeight) / 2); // Ajusta a posição da hitbox para que fique alinhada com a bandeira visualmente
+
+// Adicione a colisão entre o personagem e a bandeira
+this.physics.add.overlap(personagem, bandeira, coletarBandeira, null, this);
+
+
+
+
+
+
+
+
+
   
 }
 
@@ -208,7 +337,7 @@ function update() {
        personagem.setVelocityX(-160);
        personagem.anims.play('esquerda', true);
        personagem.flipX = true;
-       vox.setVelocityX(-160);
+       
 
     } else if(cursors.right.isDown){
        personagem.setVelocityX(160);
@@ -295,7 +424,9 @@ const config = {
         preload: preload,
         create: create,
         update: update
-    }
+      }
+    
+
 };
 
 const game = new Phaser.Game(config);
