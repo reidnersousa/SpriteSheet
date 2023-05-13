@@ -5,6 +5,7 @@ this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, f
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('bandeira', 'assets/bandeira.png'); 
 this.load.image('fundo', 'assets/MarteFundo.png'); 
+this.load.image('fundoFase2','assets/fundo_marte_2.png');
 this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:16});
 }
 
@@ -32,101 +33,12 @@ if (personagem.body.touching.left && personagem.body.x + personagem.body.height 
   }
 }
 
-/*
-function update_2() {
-  this.anims.create({
-        key : 'parado',
-        frames : this.anims.generateFrameNumbers('personagem', { start : 1, end : 3}),
-        frameRate: 2,
-        repeat : -1
-      });
-
-  this.anims.create({
-        key : 'direita',
-        frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
-        frameRate: 10,
-        repeat : -1
-      });
 
 
-  
-   this.anims.create({
-        
-
-        key : 'esquerda',
-        flipX :true,
-        frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
-        frameRate: 10,
-        repeat : -1
-      });
-
-  this.anims.create({
-        key : 'pulo',
-        
-        frames : this.anims.generateFrameNumbers('personagem', { start : 21, end : 23}),
-        frameRate: 120,
-        repeat : 1
-      });
 
 
-  
-   
 
 
-     
-  this.personagem = personagem;
-
-  this.anims.create({
-        key : 'vox_esquerda',
-        frames : this.anims.generateFrameNumbers('vox', { start : 4, end : 8}),
-        frameRate: 15,
-        repeat : -1
-      });
-
-  this.anims.create({
-        key : 'vox_direita',
-        frames : this.anims.generateFrameNumbers('vox', { start : 8, end : 15}),
-        frameRate: 15,
-        repeat : -1
-      });
-  
-}
-}
-*/
-
-function create_2() {
-  this.add.image(620, 300, 'fundo').setScale(3.0);
-
-  const plataformas = this.physics.add.staticGroup();
-
-  let plataforma1 = plataformas.create(270, 380, 'chao');
-  plataforma1.setScale(1).refreshBody();
-
-  let plataforma2 = plataformas.create(62, 380, 'chao');
-  plataforma2.setScale(1).refreshBody();
-
-  let plataforma3 = plataformas.create(62, 200, 'chao');
-  plataforma3.setScale(1).refreshBody();
-
-  let plataforma4 = plataformas.create(405, 200, 'chao');
-  plataforma4.setSize(5, 5).setScale(1).refreshBody();
-
-  let plataforma5 = plataformas.create(562, 300, 'chao');
-  plataforma5.setScale(1).refreshBody();
-
-  let plataforma6 = plataformas.create(690, 300, 'chao');
-  plataforma6.setScale(1).refreshBody();
-
-  let plataforma7 = plataformas.create(690, 252, 'chao');
-  plataforma7.setScale(1).refreshBody();
-
-  let plataforma8 = plataformas.create(830, 252, 'chao');
-  plataforma8.setScale(1).refreshBody();
-
-  let plataforma9 = plataformas.create(1030, 262, 'chao');
-  plataforma9.setScale(1).refreshBody();
-
-}
 
 
 function create() {
@@ -141,10 +53,10 @@ function create() {
   let plataforma2 = plataformas.create(62, 380, 'chao');
   plataforma2.setScale(1).refreshBody();
 
-  let plataforma3 = plataformas.create(62, 200, 'chao');
+  let plataforma3 = plataformas.create(65, 200, 'chao');
   plataforma3.setScale(1).refreshBody();
 
-  let plataforma4 = plataformas.create(405, 200, 'chao');
+  let plataforma4 = plataformas.create(395, 200, 'chao');
   plataforma4.setScale(1).refreshBody();
 
   let plataforma5 = plataformas.create(525, 332, 'chao');
@@ -179,6 +91,12 @@ function create() {
 
   let plataforma14 = plataformas.create(61, 427, 'chao');
   plataforma14.setScale(1).refreshBody();
+
+  let plataforma15 = plataformas.create(1040, 427, 'chao');
+  plataforma15.setScale(1).refreshBody();
+
+  let plataforma16 = plataformas.create(1167, 427, 'chao');
+  plataforma16.setScale(1).refreshBody();
  
 
   
@@ -188,7 +106,7 @@ function create() {
   
   
   var personagem = this.physics.add.sprite(100, 330, 'personagem');
-//  personagem.setCollideWorldBounds(true);
+
 
   this.physics.add.collider(personagem, chao);
   this.physics.add.collider(plataformas, personagem);
@@ -430,6 +348,12 @@ function update() {
     
       personagem.enableBody(true, 100, 330, true, true);
     }
+
+  if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T).isDown){
+    console.log("Nova FAse");
+    game.scene.start('scene2');
+    console.log("Nova FsssAse");
+  }
     
 
     
@@ -440,6 +364,10 @@ function update() {
     //if ((cursors.up.isDown || this.w.isDown) || (cursors.down.isDown || this.s.isDown)) this.player.setVelocityY(cursors.up.isDown || this.w.isDown ? -160 : 160);
     //else this.player.setVelocityY(0);
 }
+
+
+
+
 
 
 
@@ -463,7 +391,8 @@ const config = {
         preload: preload,
         create: create,
         update: update
-      }
+    }
+    
     
 
 };
