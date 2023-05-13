@@ -145,22 +145,40 @@ function create() {
   plataforma3.setScale(1).refreshBody();
 
   let plataforma4 = plataformas.create(405, 200, 'chao');
-  plataforma4.setSize(5, 5).setScale(1).refreshBody();
+  plataforma4.setScale(1).refreshBody();
 
-  let plataforma5 = plataformas.create(562, 300, 'chao');
+  let plataforma5 = plataformas.create(525, 332, 'chao');
   plataforma5.setScale(1).refreshBody();
 
-  let plataforma6 = plataformas.create(690, 300, 'chao');
+  let plataforma6 = plataformas.create(654, 332, 'chao');
   plataforma6.setScale(1).refreshBody();
 
-  let plataforma7 = plataformas.create(690, 252, 'chao');
+  
+  let plataforma7 = plataformas.create(654, 284, 'chao');
   plataforma7.setScale(1).refreshBody();
 
-  let plataforma8 = plataformas.create(830, 252, 'chao');
+  let plataforma8 = plataformas.create(830, 427, 'chao');
   plataforma8.setScale(1).refreshBody();
 
-  let plataforma9 = plataformas.create(1030, 262, 'chao');
+  
+
+  let plataforma9 = plataformas.create(1034, 262, 'chao');
   plataforma9.setScale(1).refreshBody();
+
+  let plataforma10 = plataformas.create(654, 427, 'chao');
+  plataforma10.setScale(1).refreshBody();
+
+  let plataforma11 = plataformas.create(525, 427, 'chao');
+  plataforma11.setScale(1).refreshBody();
+
+  let plataforma12 = plataformas.create(270, 427, 'chao');
+  plataforma12.setScale(1).refreshBody();
+
+  let plataforma13 = plataformas.create(397, 427, 'chao');
+  plataforma13.setScale(1).refreshBody();
+
+  let plataforma14 = plataformas.create(61, 427, 'chao');
+  plataforma14.setScale(1).refreshBody();
  
 
   
@@ -429,7 +447,7 @@ function update() {
 const config = {
     type: Phaser.AUTO, // Canva ou WebGL
     width: 1200,
-    height: 400,
+    height: 415,
     backgroundColor: '##000',
     autoCenter : Phaser.Scale.CENTER_BOTH,
     physics: {
