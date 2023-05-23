@@ -1,3 +1,5 @@
+
+// fase2.js
 function preload() {
  
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
@@ -42,20 +44,11 @@ if (personagem.body.touching.left && personagem.body.x + personagem.body.height 
 
 
 function create() {
-
-  this.input.keyboard.on('keydown-T', function() {
-    console.log("Fase2");
-    loadFase2();
-  });
-
-
-
  
-  this.add.image(620,300,'fundo').setScale(3.0);
+  this.add.image(620,300,'fundo_marte_2').setScale(3.0);
 
   
   const plataformas = this.physics.add.staticGroup();
-  
   let plataforma1 = plataformas.create(270, 380, 'chao');
   plataforma1.setScale(1).refreshBody();
 
@@ -106,9 +99,6 @@ function create() {
 
   let plataforma16 = plataformas.create(1167, 427, 'chao');
   plataforma16.setScale(1).refreshBody();
-
-  let plataforma17 = plataformas.create(900, 350, 'chao');
-  plataforma17.setScale(1).refreshBody();
  
 
   
@@ -245,10 +235,6 @@ function coletarBandeira(personagem, bandeira) {
 
 
 
-
-
-
-
     
 
 
@@ -365,7 +351,11 @@ function update() {
       personagem.enableBody(true, 100, 330, true, true);
     }
 
-  
+  if(this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T).isDown){
+    console.log("Nova FAse");
+    game.scene.start('scene2');
+    console.log("Nova FsssAse");
+  }
     
 
     
@@ -376,13 +366,6 @@ function update() {
     //if ((cursors.up.isDown || this.w.isDown) || (cursors.down.isDown || this.s.isDown)) this.player.setVelocityY(cursors.up.isDown || this.w.isDown ? -160 : 160);
     //else this.player.setVelocityY(0);
 }
-
-
-function loadFase2() {
-  this.scene.start('fase2');
-}
-
-
 
 
 
@@ -409,13 +392,7 @@ const config = {
     scene: {
         preload: preload,
         create: create,
-        update: update,
-
-      fase2: {
-        preload: preload,
-        create: create,
         update: update
-        }
     }
     
     
