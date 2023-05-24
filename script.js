@@ -7,7 +7,7 @@ this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, f
 
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('bandeira', 'assets/bandeira.png'); 
-this.load.image('fundo', 'assets/MarteFundo.png'); 
+this.load.image('fundo', 'assets/fase1.png'); 
 
 this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:16});
 }
@@ -25,7 +25,7 @@ if (personagem.body.touching.left && personagem.body.x + personagem.body.height 
    
         personagem.disableBody(true, true);
         personagemVivo =false;
-        console.log("Personagem morto");
+        console.log("aa",personagem.body.touching.left,personagem.body.x + personagem.body.height ,vox.body.x );
    
   }
   else if (personagem.body.touching.down && personagem.body.y  <= vox.body.y) {
@@ -46,16 +46,11 @@ if (personagem.body.touching.left && personagem.body.x + personagem.body.height 
 
 function create() {
 
-  this.input.keyboard.on('keydown-T', function() {
-    console.log("createMy");
-    this.scene.add('MyScene', MyScene, true, { x: 400, y: 800 });
-    console.log("CreateMY2");
-  }, this);
-
+ 
 
 
  
-  this.add.image(620,300,'fundo').setScale(3.0);
+  this.add.image(620,300,'fundo').setScale(1.0);
 
   
   const plataformas = this.physics.add.staticGroup();
@@ -133,6 +128,7 @@ function create() {
   vox.setCollideWorldBounds(true);
   vox.body.setSize(0,0,0,40);
   this.physics.add.collider(chao,vox);
+  console.log("bb" ,this.physics.add.overlap(personagem, vox, matarVox, null, this))
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
   this.physics.add.collider(plataformas,vox);
   
@@ -206,8 +202,10 @@ function coletarBandeira(personagem, bandeira) {
 
   pontuacao += 100;
   pontuacaoTextBandeira.setText('Pontuação: ' + pontuacao);
-  
-  
+
+  if(pontuacao === 300){
+      this.scene.add('Fase2', MyScene, true, { x: 400, y: 800 });
+  }
   bandeira.destroy();
 }
 
@@ -246,14 +244,14 @@ function coletarBandeira(personagem, bandeira) {
   this.physics.add.overlap(personagem, bandeira2, coletarBandeira, null, this);
 
 
+  
 
 
 
 
 
-
-
-    
+   
+  
 
 
 
@@ -291,6 +289,8 @@ function voxMovimentosEsquerda(vox){
 var escolha =false;
 
 function update() {
+
+   
     
     
   
