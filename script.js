@@ -1,3 +1,6 @@
+import MyScene from './fase2.js';
+
+
 function preload() {
  
 this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
@@ -5,7 +8,7 @@ this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, f
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('bandeira', 'assets/bandeira.png'); 
 this.load.image('fundo', 'assets/MarteFundo.png'); 
-this.load.image('fundoFase2','assets/fundo_marte_2.png');
+
 this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:16});
 }
 
@@ -44,9 +47,10 @@ if (personagem.body.touching.left && personagem.body.x + personagem.body.height 
 function create() {
 
   this.input.keyboard.on('keydown-T', function() {
-    console.log("Fase2");
-    loadFase2();
-  });
+    console.log("createMy");
+    this.scene.add('MyScene', MyScene, true, { x: 400, y: 800 });
+    console.log("CreateMY2");
+  }, this);
 
 
 
@@ -378,9 +382,7 @@ function update() {
 }
 
 
-function loadFase2() {
-  this.scene.start('fase2');
-}
+
 
 
 
@@ -410,12 +412,9 @@ const config = {
         preload: preload,
         create: create,
         update: update,
+        MyScene :MyScene
 
-      fase2: {
-        preload: preload,
-        create: create,
-        update: update
-        }
+      
     }
     
     
