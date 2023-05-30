@@ -85,12 +85,12 @@ class MyScene extends Phaser.Scene {
   
     vox_fase2.setCollideWorldBounds(true);
     vox_fase2.body.setSize(0,0,0,40);
-    this.physics.add.collider(chao,vox);
+    this.physics.add.collider(chao,vox_fase2);
    
-    this.physics.add.collider(plataformas,vox);
+    this.physics.add.collider(plataformas,vox_fase2);
     
     
-  this.vox = vox;
+  this.vox_fase2 = vox_fase2;
 
 
      this.anims.create({
@@ -146,7 +146,7 @@ class MyScene extends Phaser.Scene {
     let cursors = this.input.keyboard.createCursorKeys();
     var personagem = this.personagem;
 
-    var vox = this.vox;
+    var vox_fase2 = this.vox_fase2;
 
     
     
