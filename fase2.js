@@ -6,7 +6,7 @@ class MyScene extends Phaser.Scene {
     this.load.image('chao', 'assets/chao.png'); 
     this.load.image('fundo_2', 'assets/fundo_marte_2.png'); 
     this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
-    this.load.spritesheet('vox_fase_2','assets/1.png',{frameWidth:16,frameHeight:16});
+    this.load.spritesheet('vox_fase_2','assets/1.png',{frameWidth:15,frameHeight:15});
     
     
   }
@@ -134,6 +134,21 @@ class MyScene extends Phaser.Scene {
 
      
   this.personagem = personagem;
+
+    this.anims.create({
+        key : 'vox_esquerda',
+        frames : this.anims.generateFrameNumbers('vox_fase2', { start : 4, end : 8}),
+        frameRate: 15,
+        repeat : -1
+      });
+
+  this.anims.create({
+        key : 'vox_direita',
+        frames : this.anims.generateFrameNumbers('vox_fase2', { start : 8, end : 15}),
+        frameRate: 15,
+        repeat : -1
+      });
+
 
     
   }
