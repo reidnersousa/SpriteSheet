@@ -108,6 +108,9 @@ function create() {
 
   let plataforma17 = plataformas.create(900, 350, 'chao');
   plataforma17.setScale(1).refreshBody();
+
+  let plataforma18 = plataformas.create(200, 200, 'chao');
+  plataforma18.setScale(1).refreshBody();
  
 
   

@@ -3,106 +3,108 @@
 class MyScene extends Phaser.Scene {
   preload() {
     console.log("preload em MyScene");
-    this.load.image('chao', 'assets/chao.png'); 
+    this.load.image('chao_2', 'assets/chao.png'); 
     this.load.image('fundo_2', 'assets/fundo_marte_2.png'); 
-    this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
-    this.load.spritesheet('vox_fase_2','assets/1.png',{frameWidth:15,frameHeight:15});
+    this.load.spritesheet('personagem_2','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
+    this.load.spritesheet('vox_fase2','assets/1.png',{frameWidth:16,frameHeight:16});
     
     
-  }
+  } // fim da preload dentro da preload 
 
   create() {
     console.log("create em MyScene");
     this.add.image(620, 300, 'fundo_2').setScale(2.0);
-    const chao = this.physics.add.staticImage(397, 380, 'chao');
-    chao.body.setSize(129, 46, 0, 0);
+    const chao_2 = this.physics.add.staticImage(397, 380, 'chao_2');
+    chao_2.body.setSize(129, 46, 0, 0);
 
     const plataformas = this.physics.add.staticGroup();
   
-    let plataforma1 = plataformas.create(270, 380, 'chao');
+    let plataforma1 = plataformas.create(270, 380, 'chao_2');
     plataforma1.setScale(1).refreshBody();
   
-    let plataforma2 = plataformas.create(62, 380, 'chao');
+    let plataforma2 = plataformas.create(62, 380, 'chao_2');
     plataforma2.setScale(1).refreshBody();
   
-    let plataforma3 = plataformas.create(65, 200, 'chao');
+    let plataforma3 = plataformas.create(65, 200, 'chao_2');
     plataforma3.setScale(1).refreshBody();
   
-    let plataforma4 = plataformas.create(395, 200, 'chao');
+    let plataforma4 = plataformas.create(395, 200, 'chao_2');
     plataforma4.setScale(1).refreshBody();
   
-    let plataforma5 = plataformas.create(525, 332, 'chao');
+    let plataforma5 = plataformas.create(525, 332, 'chao_2');
     plataforma5.setScale(1).refreshBody();
   
-    let plataforma6 = plataformas.create(654, 332, 'chao');
+    let plataforma6 = plataformas.create(654, 332, 'chao_2');
     plataforma6.setScale(1).refreshBody();
   
     
-    let plataforma7 = plataformas.create(654, 284, 'chao');
+    let plataforma7 = plataformas.create(654, 284, 'chao_2');
     plataforma7.setScale(1).refreshBody();
   
-    let plataforma8 = plataformas.create(830, 427, 'chao');
+    let plataforma8 = plataformas.create(830, 427, 'chao_2');
     plataforma8.setScale(1).refreshBody();
     
-    let plataforma9 = plataformas.create(1034, 262, 'chao');
+    let plataforma9 = plataformas.create(1034, 262, 'chao_2');
     plataforma9.setScale(1).refreshBody();
   
-    let plataforma10 = plataformas.create(654, 427, 'chao');
+    let plataforma10 = plataformas.create(654, 427, 'chao_2');
     plataforma10.setScale(1).refreshBody();
   
-    let plataforma11 = plataformas.create(525, 427, 'chao');
+    let plataforma11 = plataformas.create(525, 427, 'chao_2');
     plataforma11.setScale(1).refreshBody();
   
-    let plataforma12 = plataformas.create(270, 427, 'chao');
+    let plataforma12 = plataformas.create(270, 427, 'chao_2');
     plataforma12.setScale(1).refreshBody();
   
-    let plataforma13 = plataformas.create(397, 427, 'chao');
+    let plataforma13 = plataformas.create(397, 427, 'chao_2');
     plataforma13.setScale(1).refreshBody();
   
-    let plataforma14 = plataformas.create(61, 427, 'chao');
+    let plataforma14 = plataformas.create(61, 427, 'chao_2');
     plataforma14.setScale(1).refreshBody();
   
-    let plataforma15 = plataformas.create(1040, 427, 'chao');
+    let plataforma15 = plataformas.create(1040, 427, 'chao_2');
     plataforma15.setScale(1).refreshBody();
   
-    let plataforma16 = plataformas.create(1167, 427, 'chao');
+    let plataforma16 = plataformas.create(1167, 427, 'chao_2');
     plataforma16.setScale(1).refreshBody();
   
-    let plataforma17 = plataformas.create(900, 350, 'chao');
+    let plataforma17 = plataformas.create(900, 350, 'chao_2');
     plataforma17.setScale(1).refreshBody();
 
-    this.physics.add.collider(chao,personagem );
+    this.physics.add.collider(chao_2,personagem_2 );
   
   
-    var personagem = this.physics.add.sprite(100, 330, 'personagem');
+    var personagem_2 = this.physics.add.sprite(100, 330, 'personagem_2');
+    this.personagem_2 = personagem_2;
+
+    this.physics.add.collider(chao_2, personagem_2);
+    this.physics.add.collider(plataformas, personagem_2);
 
 
-    this.physics.add.collider(personagem, chao);
-    this.physics.add.collider(plataformas, personagem);
-
-
-     var vox_fase2 = this.physics.add.sprite(300, 350, 'vox_fase2');
-  
-    vox_fase2.setCollideWorldBounds(true);
+    var vox_fase2 = this.physics.add.sprite(300, 350, 'vox_fase2');
+    this.vox_fase2 = vox_fase2;
+    this.physics.add.collider(chao_2,vox_fase2);
+    
+    vox_fase2.setCollideWorldBounds(false);
     vox_fase2.body.setSize(0,0,0,40);
-    this.physics.add.collider(chao,vox_fase2);
+    
    
     this.physics.add.collider(plataformas,vox_fase2);
     
     
-  this.vox_fase2 = vox_fase2;
+
 
 
      this.anims.create({
         key : 'parado',
-        frames : this.anims.generateFrameNumbers('personagem', { start : 1, end : 3}),
+        frames : this.anims.generateFrameNumbers('personagem_2', { start : 1, end : 3}),
         frameRate: 2,
         repeat : -1
       });
 
   this.anims.create({
         key : 'direita',
-        frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
+        frames : this.anims.generateFrameNumbers('personagem_2', { start : 11, end : 19}),
         frameRate: 10,
         repeat : -1
       });
@@ -114,7 +116,7 @@ class MyScene extends Phaser.Scene {
 
         key : 'esquerda',
         flipX :true,
-        frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
+        frames : this.anims.generateFrameNumbers('personagem_2', { start : 11, end : 19}),
         frameRate: 10,
         repeat : -1
       });
@@ -122,7 +124,7 @@ class MyScene extends Phaser.Scene {
   this.anims.create({
         key : 'pulo',
         
-        frames : this.anims.generateFrameNumbers('personagem', { start : 21, end : 23}),
+        frames : this.anims.generateFrameNumbers('personagem_2', { start : 21, end : 23}),
         frameRate: 120,
         repeat : 1
       });
@@ -133,7 +135,7 @@ class MyScene extends Phaser.Scene {
 
 
      
-  this.personagem = personagem;
+  
 
     this.anims.create({
         key : 'vox_esquerda',
@@ -151,7 +153,7 @@ class MyScene extends Phaser.Scene {
 
 
     
-  }
+  } // fim da create dentro da create
 
   update() {
 
@@ -159,48 +161,48 @@ class MyScene extends Phaser.Scene {
 
 
     let cursors = this.input.keyboard.createCursorKeys();
-    var personagem = this.personagem;
+    var personagem_2 = this.personagem_2;
 
     var vox_fase2 = this.vox_fase2;
 
     
     
     if(cursors.left.isDown){
-       personagem.setVelocityX(-160);
-       personagem.anims.play('esquerda', true);
-       personagem.flipX = true;
+       personagem_2.setVelocityX(-160);
+       personagem_2.anims.play('esquerda', true);
+       personagem_2.flipX = true;
        
 
     } else if(cursors.right.isDown){
-       personagem.setVelocityX(160);
-       personagem.anims.play('direita', true);
-       personagem.flipX = false;
+       personagem_2.setVelocityX(160);
+       personagem_2.anims.play('direita', true);
+       personagem_2.flipX = false;
        
 
     }
-    else if(cursors.up.isDown && personagem.body.onFloor()){
+    else if(cursors.up.isDown && personagem_2.body.onFloor()){
       
-      personagem.setVelocityY(-160);
+      personagem_2.setVelocityY(-160);
     
       
       
     }
     else if(cursors.down.isDown){
-      personagem.setVelocity(0);
+      personagem_2.setVelocity(0);
     }
-    else if (cursors.space.isDown && personagem.body.onFloor()) {
+    else if (cursors.space.isDown && personagem_2.body.onFloor()) {
       
       // primeiro pulo
       console.log("Primeiro pulo ");
-      personagem.anims.play('pulo', true);
-      personagem.setVelocityY(-300);
+      personagem_2.anims.play('pulo', true);
+      personagem_2.setVelocityY(-300);
      
-      if (cursors.space.isDown &&  personagem.jumpCount < 2)     {
+      if (cursors.space.isDown &&  personagem_2.jumpCount < 2)     {
       // segundo pulo
         
-        personagem.setVelocityY(-400);
+        personagem_2.setVelocityY(-400);
         console.log("Entrei no segundo espaço");
-        personagem.jumpCount++;
+        personagem_2.jumpCount++;
       } 
 
       
@@ -211,9 +213,9 @@ class MyScene extends Phaser.Scene {
       
     else
     { 
-      personagem.setVelocityX(0);
+      personagem_2.setVelocityX(0);
       
-      personagem.anims.play('parado',false);
+      personagem_2.anims.play('parado',false);
       
     }
 
@@ -221,13 +223,13 @@ class MyScene extends Phaser.Scene {
     if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R).isDown && personagemVivo === false){
       console.log("Reviver");
     
-      personagem.enableBody(true, 100, 330, true, true);
+      personagem_2.enableBody(true, 100, 330, true, true);
     }
 
   
 
 
-  }
+  } // fim da update dentro da MyScene 
 }
 
 
