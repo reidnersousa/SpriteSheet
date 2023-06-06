@@ -3,13 +3,13 @@ import MyScene from './fase2.js';
 
 function preload() {
  
-this.load.spritesheet('personagem','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
+this.load.spritesheet('personagem','assets/astronauta_laranja.png', { frameWidth:32.8, frameHeight:47.5 });
 
 this.load.image('chao', 'assets/chao.png'); 
 this.load.image('bandeira', 'assets/bandeira.png'); 
 this.load.image('fundo', 'assets/fase1.png'); 
 
-this.load.spritesheet('vox','assets/1.png',{frameWidth:16,frameHeight:16});
+this.load.spritesheet('vox','assets/monstro.png',{frameWidth:16,frameHeight:16});
 }
 
 var qtdChamadas = 0;

@@ -4,9 +4,9 @@ class MyScene extends Phaser.Scene {
   preload() {
     console.log("preload em MyScene");
     this.load.image('chao_2', 'assets/chao.png'); 
-    this.load.image('fundo_2', 'assets/fundo_marte_2.png'); 
+    this.load.image('fundo_2', 'assets/fase2.png'); 
     this.load.spritesheet('personagem_2','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
-    this.load.spritesheet('vox_fase2','assets/1.png',{frameWidth:16,frameHeight:16});
+    this.load.spritesheet('vox_fase2','assets/monstro.png',{frameWidth:16,frameHeight:16});
     
     
   } // fim da preload dentro da preload 
@@ -72,8 +72,7 @@ class MyScene extends Phaser.Scene {
     plataforma17.setScale(1).refreshBody();
 
     this.physics.add.collider(chao_2,personagem_2 );
-  
-  
+    
     var personagem_2 = this.physics.add.sprite(100, 330, 'personagem_2');
     this.personagem_2 = personagem_2;
 

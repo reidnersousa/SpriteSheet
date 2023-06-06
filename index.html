@@ -3,16 +3,40 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
-    <title>repl.it</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.16.2/phaser.min.js"></script>
+    <title>Menu</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-image: url('assets/imagem_menu.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
 
-    <script type="module" src="script.js"></script>
+      .button {
+        padding: 12px 24px;
+        font-size: 20px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
 
+      .button:hover {
+        background-color: #45a049;
+      }
+    </style>
   </head>
   <body>
-   
-  
-    <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script> 
+    <button class="button" onclick="startGame()">Jogar</button>
+
+    <script>
+      function startGame() {
+        window.location.href = "menu.html";
+      }
+    </script>
   </body>
 </html>
