@@ -74,7 +74,9 @@ class MyScene extends Phaser.Scene {
     this.physics.add.collider(chao_2,personagem_2 );
     
     var personagem_2 = this.physics.add.sprite(100, 330, 'personagem_2');
+    
     this.personagem_2 = personagem_2;
+    
 
     this.physics.add.collider(chao_2, personagem_2);
     this.physics.add.collider(plataformas, personagem_2);
@@ -206,9 +208,6 @@ class MyScene extends Phaser.Scene {
 
       
     } 
-
-
-
       
     else
     { 
@@ -224,9 +223,6 @@ class MyScene extends Phaser.Scene {
     
       personagem_2.enableBody(true, 100, 330, true, true);
     }
-
-  
-
 
   } // fim da update dentro da MyScene 
 }

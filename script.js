@@ -1,5 +1,5 @@
 import MyScene from './fase2.js';
-
+import Monstro from './monstro.js';
 
 function preload() {
  
@@ -9,7 +9,9 @@ this.load.image('chao', 'assets/chao.png');
 this.load.image('bandeira', 'assets/bandeira.png'); 
 this.load.image('fundo', 'assets/fase1.png'); 
 
-this.load.spritesheet('vox','assets/monstro.png',{frameWidth:16,frameHeight:16});
+  /** monstro.png - widht: 16 - height: 16*/
+  /** monstro2.png - widht: 39 - height: 55*/
+this.load.spritesheet('vox','assets/monstro2.png',{frameWidth:51,frameHeight:55});
 }
 
 var qtdChamadas = 0;
@@ -21,7 +23,7 @@ function matarVox(personagem, vox) {
    
   
 if (personagem.body.touching.left && personagem.body.x + personagem.body.height >= vox.body.x  ||       
-           personagem.body.touching.right && personagem.body.x + personagem.body.height >= vox.body.x){
+    personagem.body.touching.right && personagem.body.x + personagem.body.height >= vox.body.x){
    
         personagem.disableBody(true, true);
         personagemVivo =false;
@@ -37,19 +39,9 @@ if (personagem.body.touching.left && personagem.body.x + personagem.body.height 
 }
 
 
-
-
-
-
-
-
-
 function create() {
 
- 
-
-
- 
+  
   this.add.image(620,300,'fundo').setScale(1.0);
 
   
@@ -124,23 +116,22 @@ function create() {
 
   this.physics.add.collider(personagem, chao);
   this.physics.add.collider(plataformas, personagem);
-
   
-  var vox = this.physics.add.sprite(300, 350, 'vox');
   
+  
+  var vox = this.physics.add.sprite(300, 250, 'vox');
+  this.physics.add.collider(plataformas,vox);
+  this.physics.add.collider(chao,vox);
   vox.setCollideWorldBounds(true);
   vox.body.setSize(0,0,0,40);
-  this.physics.add.collider(chao,vox);
+  
   console.log("bb" ,this.physics.add.overlap(personagem, vox, matarVox, null, this))
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
-  this.physics.add.collider(plataformas,vox);
+  
   
   
   this.vox = vox;
 
-  
-
- 
   this.anims.create({
         key : 'parado',
         frames : this.anims.generateFrameNumbers('personagem', { start : 1, end : 3}),
@@ -148,18 +139,13 @@ function create() {
         repeat : -1
       });
 
-  this.anims.create({
+      this.anims.create({
         key : 'direita',
         frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
         frameRate: 10,
         repeat : -1
       });
-
-
-  
    this.anims.create({
-        
-
         key : 'esquerda',
         flipX :true,
         frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
@@ -174,26 +160,20 @@ function create() {
         frameRate: 120,
         repeat : 1
       });
-
-
-  
-   
-
-
-     
   this.personagem = personagem;
 
   this.anims.create({
         key : 'vox_esquerda',
-        frames : this.anims.generateFrameNumbers('vox', { start : 4, end : 8}),
-        frameRate: 15,
+        flipX:true,
+        frames : this.anims.generateFrameNumbers('vox', { start : 1, end : 11}),
+        frameRate: 90,
         repeat : -1
       });
 
   this.anims.create({
         key : 'vox_direita',
-        frames : this.anims.generateFrameNumbers('vox', { start : 8, end : 15}),
-        frameRate: 15,
+        frames : this.anims.generateFrameNumbers('vox', { start : 1, end : 11}),
+        frameRate: 90,
         repeat : -1
       });
 
@@ -246,21 +226,6 @@ function coletarBandeira(personagem, bandeira) {
   bandeira2.body.setOffset((bandeira2.width - hitboxWidth2) / 2, (bandeira2.height - hitboxHeight2) / 2);
   this.physics.add.overlap(personagem, bandeira2, coletarBandeira, null, this);
 
-
-  
-
-
-
-
-
-   
-  
-
-
-
-
-
-  
 }
 
 
@@ -271,7 +236,7 @@ function voxMovimentosDireita(vox){
   qtdChamadas++;
   
   if(qtdChamadas == 50){
-    escolha =true;
+    escolha = true;
   }
   
 }
@@ -281,11 +246,10 @@ function voxMovimentosEsquerda(vox){
   
   vox.setVelocityX(-45);
   qtdChamadas--;
-  
   if(qtdChamadas == -50){
+  
     escolha =false;
   }
-  
   
 }
 
@@ -293,24 +257,22 @@ var escolha =false;
 
 function update() {
 
-   
-    
-    
-  
     let cursors = this.input.keyboard.createCursorKeys();
     var personagem = this.personagem;
 
     var vox = this.vox;
 
     if (escolha == false){
-     
       voxMovimentosDireita(vox);
       vox.anims.play('vox_direita');
+      vox.flipX=false;
+      
     }
     
     if (escolha == true){ 
       voxMovimentosEsquerda(vox);
       vox.anims.play('vox_esquerda');
+      vox.flipX=true;
     }
     
     if(cursors.left.isDown){
@@ -415,12 +377,8 @@ const config = {
         preload: preload,
         create: create,
         update: update,
-        MyScene :MyScene
-
-      
-    }
-    
-    
+        MyScene: MyScene
+   }  
 
 };
 
