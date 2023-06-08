@@ -11,7 +11,7 @@ this.load.image('fundo', 'assets/fase1.png');
 
   /** monstro.png - widht: 16 - height: 16*/
   /** monstro2.png - widht: 39 - height: 55*/
-this.load.spritesheet('vox','assets/monstro2.png',{frameWidth:51,frameHeight:55});
+this.load.spritesheet('vox','assets/monstro2.png',{frameWidth:51,frameHeight:53});
 }
 
 var qtdChamadas = 0;
@@ -130,7 +130,7 @@ function create() {
   
   
   
-  this.vox = vox;
+ 
 
   this.anims.create({
         key : 'parado',
@@ -156,9 +156,9 @@ function create() {
   this.anims.create({
         key : 'pulo',
         
-        frames : this.anims.generateFrameNumbers('personagem', { start : 21, end : 23}),
-        frameRate: 120,
-        repeat : 1
+        frames : this.anims.generateFrameNumbers('personagem', { start : 22, end : 26}),
+        frameRate: 3,
+        repeat : -1
       });
   this.personagem = personagem;
 
@@ -166,16 +166,18 @@ function create() {
         key : 'vox_esquerda',
         flipX:true,
         frames : this.anims.generateFrameNumbers('vox', { start : 1, end : 11}),
-        frameRate: 90,
+        frameRate:10,
         repeat : -1
       });
 
   this.anims.create({
         key : 'vox_direita',
-        frames : this.anims.generateFrameNumbers('vox', { start : 1, end : 11}),
-        frameRate: 90,
+        frames : this.anims.generateFrameNumbers('vox', { start : 1,end:13}),
+        frameRate: 10,
         repeat : -1
       });
+
+   this.vox = vox;
 
 var pontuacao = 0;
 var pontuacaoTextBandeira = this.add.text(16, 16, 'Pontuação: 0', { fontSize: '32px', fill: '#000' });
@@ -232,10 +234,10 @@ function coletarBandeira(personagem, bandeira) {
 
 function voxMovimentosDireita(vox){
   
-  vox.setVelocityX(45);
+  vox.setVelocityX(25);
   qtdChamadas++;
   
-  if(qtdChamadas == 50){
+  if(qtdChamadas == 150){
     escolha = true;
   }
   
@@ -244,9 +246,9 @@ function voxMovimentosDireita(vox){
 
 function voxMovimentosEsquerda(vox){
   
-  vox.setVelocityX(-45);
+  vox.setVelocityX(-25);
   qtdChamadas--;
-  if(qtdChamadas == -50){
+  if(qtdChamadas == -150){
   
     escolha =false;
   }
@@ -264,14 +266,14 @@ function update() {
 
     if (escolha == false){
       voxMovimentosDireita(vox);
-      vox.anims.play('vox_direita');
+      vox.anims.play('vox_direita',true);
       vox.flipX=false;
       
     }
     
     if (escolha == true){ 
       voxMovimentosEsquerda(vox);
-      vox.anims.play('vox_esquerda');
+      vox.anims.play('vox_esquerda',true);
       vox.flipX=true;
     }
     
@@ -301,9 +303,10 @@ function update() {
     else if (cursors.space.isDown && personagem.body.onFloor()) {
       
       // primeiro pulo
-      console.log("Primeiro pulo ");
-      personagem.anims.play('pulo', true);
+      console.log("Primeiro pulo "); 
       personagem.setVelocityY(-300);
+      personagem.anims.play('pulo', true);
+     
      
       if (cursors.space.isDown &&  personagem.jumpCount < 2)     {
       // segundo pulo
