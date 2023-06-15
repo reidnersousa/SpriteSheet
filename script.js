@@ -62,6 +62,8 @@ function acertaTiro(tiro, vox) {
 function create() {
 
   textoVidas = this.add.text(16, 16, 'Vidas: ' + vidas, { fontSize: '32px', fill: '#000' });
+
+  AnimationMonstro.createAnimations(this);
  
   const plataformasInstance = new Blocos(this);
   plataformasInstance.preload();
@@ -191,7 +193,7 @@ function create() {
     repeat :-1
   })
   this.personagem = personagem;
-
+/*
   this.anims.create({
     key : 'vox_esquerda',
     flipX:true,
@@ -206,6 +208,7 @@ function create() {
     frameRate: 10,
     repeat : -1
   });
+  */
 
   this.vox = vox;
 
