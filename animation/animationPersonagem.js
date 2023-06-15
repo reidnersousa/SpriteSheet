@@ -1,5 +1,6 @@
 //animationPersonagem.js
 export class AnimationPersonagem {
+  
   static createAnimations(scene) {
 
     scene.anims.create({

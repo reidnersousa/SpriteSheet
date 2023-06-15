@@ -2,6 +2,8 @@ import MyScene from './fase2.js';
 import Monstro from './monstro.js';
 import Blocos from './plataformas.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
+import { AnimationPersonagem } from "./animation/animationPersonagem.js";
+
 
 function preload() {
   this.load.spritesheet('personagem','assets/astronauta_laranja.png', { frameWidth:32.8, frameHeight:47.5 });
@@ -64,7 +66,7 @@ function create() {
   textoVidas = this.add.text(16, 16, 'Vidas: ' + vidas, { fontSize: '32px', fill: '#000' });
 
   AnimationMonstro.createAnimations(this);
- 
+  AnimationPersonagem.createAnimations(this);
   const plataformasInstance = new Blocos(this);
   plataformasInstance.preload();
  
@@ -155,7 +157,7 @@ function create() {
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
   this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
 
-  
+  /* remove apos 2 push
   this.anims.create({
     key : 'parado',
     frames : this.anims.generateFrameNumbers('personagem', { start : 1, end : 3}),
@@ -169,6 +171,7 @@ function create() {
     frameRate: 10,
     repeat : -1
   });
+  
   this.anims.create({
     key : 'esquerda',
     flipX :true,
@@ -192,8 +195,9 @@ function create() {
     frameRate :10,
     repeat :-1
   })
+  */
   this.personagem = personagem;
-/*
+/* remove apos 2 push
   this.anims.create({
     key : 'vox_esquerda',
     flipX:true,
