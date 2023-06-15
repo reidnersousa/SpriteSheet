@@ -5,6 +5,7 @@ import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
 
 
+
 function preload() {
   this.load.spritesheet('personagem','assets/astronauta_laranja.png', { frameWidth:32.8, frameHeight:47.5 });
   
