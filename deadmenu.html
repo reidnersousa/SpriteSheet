@@ -4,7 +4,10 @@
   <title>Menu de Morte</title>
   <style>
     body {
-      background-color: #000;
+      background-image: url('falling.gif');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
       color: #fff;
       font-family: Arial, sans-serif;
       text-align: center;
@@ -36,12 +39,12 @@
 <body>
   <h1>Game Over</h1>
   <p>Você falhou em sua missão!</p>
-  <button onclick="reiniciarJogo()">Reiniciar</button>
+  <button onclick="startGame()">Reiniciar</button>
 
-  <script>
-    function reiniciarJogo() {
-      alert("O jogo será reiniciado!");
-    }
-  </script>
+   <script>
+      function startGame() {
+        window.location.href = "menu.html";
+      }
+    </script>
 </body>
 </html>

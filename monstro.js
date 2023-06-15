@@ -11,21 +11,21 @@ class Monstro  {
     
   } // fim da preload dentro da preload 
 
-  create() {
+ create() {
+  var randomX = Phaser.Math.Between(100, 700); // Posição horizontal aleatória
+  var randomY = Phaser.Math.Between(100, 500); // Posição vertical aleatória
 
-      var monstro = this.physics.add.sprite(600,50,'monstro');
-      monstro.setCollideWorldBounds(true);
-      monstro.body.setSize(0,0,0,50);
+  var monstro = this.physics.add.sprite(randomX, randomY, 'monstro');
+  monstro.setCollideWorldBounds(true);
+  monstro.body.setSize(0, 0, 0, 50);
 
-      const p_teste = this.physics.add.staticGroup();
-  
-      let p_1 = p_teste.create(600, 100, 'blocos');
-      p_1.setScale(1).refreshBody();
+  const p_teste = this.physics.add.staticGroup();
 
-      this.physics.add.collider(p_teste, monstro);
+  let p_1 = p_teste.create(randomX, randomY + 50, 'blocos');
+  p_1.setScale(1).refreshBody();
 
-  } // fim da create dentro da create
-
+  this.physics.add.collider(p_teste, monstro);
+}
   update() {
 
 

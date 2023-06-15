@@ -5,7 +5,7 @@ class MyScene extends Phaser.Scene {
     console.log("preload em MyScene");
     this.load.image('chao_2', 'assets/chao.png'); 
     this.load.image('fundo_2', 'assets/fase2.png'); 
-    this.load.spritesheet('personagem_2','assets/astronauta.png', { frameWidth:32.8, frameHeight:47.5 });
+    this.load.spritesheet('personagem_2','assets/astronauta_laranja.png', { frameWidth:32.8, frameHeight:47.5 });
     this.load.spritesheet('vox_fase2','assets/monstro.png',{frameWidth:16,frameHeight:16});
     
     
@@ -91,11 +91,8 @@ class MyScene extends Phaser.Scene {
     
    
     this.physics.add.collider(plataformas,vox_fase2);
+
     
-    
-
-
-
      this.anims.create({
         key : 'parado',
         frames : this.anims.generateFrameNumbers('personagem_2', { start : 1, end : 3}),
@@ -110,11 +107,7 @@ class MyScene extends Phaser.Scene {
         repeat : -1
       });
 
-
-  
    this.anims.create({
-        
-
         key : 'esquerda',
         flipX :true,
         frames : this.anims.generateFrameNumbers('personagem_2', { start : 11, end : 19}),
@@ -124,19 +117,10 @@ class MyScene extends Phaser.Scene {
 
   this.anims.create({
         key : 'pulo',
-        
         frames : this.anims.generateFrameNumbers('personagem_2', { start : 21, end : 23}),
         frameRate: 120,
         repeat : 1
       });
-
-
-  
-   
-
-
-     
-  
 
     this.anims.create({
         key : 'vox_esquerda',
@@ -184,9 +168,7 @@ class MyScene extends Phaser.Scene {
     else if(cursors.up.isDown && personagem_2.body.onFloor()){
       
       personagem_2.setVelocityY(-160);
-    
-      
-      
+
     }
     else if(cursors.down.isDown){
       personagem_2.setVelocity(0);

@@ -1,52 +1,32 @@
-// Plataforma.js
+// Plataformas.js
 
-class Plataformas  {
+class Plataformas {
+  constructor(scene) {
+    this.scene = scene;
+  }
+
   preload() {
+    console.log("preload dentro de Plataformas")
+    this.scene.load.image('blocos', 'assets/chao.png');
+ 
    
-    this.load.image('blocos', 'assets/chao.png'); 
-    
-    
-    
-  } // fim da preload dentro da preload 
+  }
 
   create() {
+    console.log("create dentro de Plataformas")
     
-    const plataformas = this.physics.add.staticGroup();
-  
-    let plataforma1 = plataformas.create(600, 200, 'blocos');
+    const plataformas = this.scene.physics.add.staticGroup();
+
+    let plataforma1 = plataformas.create(130, 400, 'blocos');
     plataforma1.setScale(1).refreshBody();
-   
-  
-   
-  
 
-  
+    // Outras configurações de plataforma...
 
-  
-
- 
-
-
-    
-  } // fim da create dentro da create
+  }
 
   update() {
-
-
-
-   
-
-
-
-   
-
-
-  } // fim da update dentro da Plataforma 
+    // Lógica de atualização da plataforma...
+  }
 }
 
-
-
-
-
-
-export default Plataformas;// fase2.js
+export default Plataformas;
