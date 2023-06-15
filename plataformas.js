@@ -17,9 +17,11 @@ class Plataformas {
     
     const plataformas = this.scene.physics.add.staticGroup();
 
-    let plataforma1 = plataformas.create(130, 400, 'blocos');
+    let plataforma1 = plataformas.create(130, 330, 'blocos');
     plataforma1.setScale(1).refreshBody();
 
+    let plataforma20 = plataformas.create(-100, 330, 'chao');
+  plataforma20.setScale(1).refreshBody();
     // Outras configurações de plataforma...
 
   }

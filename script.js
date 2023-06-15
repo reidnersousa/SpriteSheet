@@ -1,7 +1,7 @@
 import MyScene from './fase2.js';
 import Monstro from './monstro.js';
 import Blocos from './plataformas.js';
-
+import { AnimationMonstro } from "./animation/animationMonstro.js";
 
 function preload() {
   this.load.spritesheet('personagem','assets/astronauta_laranja.png', { frameWidth:32.8, frameHeight:47.5 });
@@ -62,6 +62,7 @@ function acertaTiro(tiro, vox) {
 function create() {
 
   textoVidas = this.add.text(16, 16, 'Vidas: ' + vidas, { fontSize: '32px', fill: '#000' });
+ 
   const plataformasInstance = new Blocos(this);
   plataformasInstance.preload();
  
@@ -120,7 +121,8 @@ function create() {
   //let plataforma19 = plataformas.create(900, 650, 'chao');
   //plataforma19.setScale(1).refreshBody();
   /*let plataforma20 = plataformas.create(400, 500, 'chao');
-  plataforma20.setScale(1).refreshBody();*/
+  plataforma20.setScale(1).refreshBody();
+  */
 
   const chao = this.physics.add.staticImage(397, 380, 'chao');
   chao.body.setSize(129, 46, 0, 0);
@@ -461,14 +463,15 @@ const config = {
             gravity: {
                 y: 300
             },*/
-            debug: false
+            debug: true
         }
     },
     scene: {
         preload: preload,
         create: create,
         update: update,
-        MyScene: MyScene
+        MyScene: MyScene,
+        Blocos :Blocos
    }  
 
 };
