@@ -1,6 +1,6 @@
 import MyScene from './fase2.js';
 import Monstro from './monstro.js';
-import Blocos from './plataformas.js';
+import { Plataformas}  from './cenario/plataformas.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
 
@@ -67,10 +67,8 @@ function create() {
 
   AnimationMonstro.createAnimations(this);
   AnimationPersonagem.createAnimations(this);
-  const plataformasInstance = new Blocos(this);
-  plataformasInstance.preload();
+  
  
-  plataformasInstance.create();
   
   
   const fundo = this.add.image(620, 300, 'fundo').setScale(1.0);
@@ -122,11 +120,7 @@ function create() {
   plataforma16.setScale(1).refreshBody();
 
 
-  //let plataforma19 = plataformas.create(900, 650, 'chao');
-  //plataforma19.setScale(1).refreshBody();
-  /*let plataforma20 = plataformas.create(400, 500, 'chao');
-  plataforma20.setScale(1).refreshBody();
-  */
+  
 
   const chao = this.physics.add.staticImage(397, 380, 'chao');
   chao.body.setSize(129, 46, 0, 0);
@@ -144,11 +138,15 @@ function create() {
   this.physics.add.collider(personagem, chao);
   this.physics.add.collider(plataformas, personagem);
   this.physics.add.collider(plataformas, personagem);
+
   
  
   this.physics.add.collider(plataformas,vox);
-   this.physics.add.collider(tiro,vox);
+  this.physics.add.collider(tiro,vox);
   this.physics.add.collider(chao,vox);
+  
+  Plataformas.createPlataformas(this);
+
   vox.setCollideWorldBounds(true);
   vox.body.setSize(0,0,0,40);
 
@@ -477,10 +475,11 @@ const config = {
         preload: preload,
         create: create,
         update: update,
-        MyScene: MyScene,
-        Blocos :Blocos
+        MyScene: MyScene
+       
    }  
 
 };
 
 const game = new Phaser.Game(config);
+
