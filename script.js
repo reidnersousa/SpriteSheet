@@ -81,16 +81,17 @@ function create() {
 
   let plataforma14 = plataformas.create(270, 380, 'chao');
   plataforma14.setScale(1).refreshBody();
-  
+  /*
   let plataforma3 = plataformas.create(65, 200, 'chao');
   plataforma3.setScale(1).refreshBody();
   let plataforma4 = plataformas.create(395, 200, 'chao');
   plataforma4.setScale(1).refreshBody();
   let plataforma5 = plataformas.create(525, 332, 'chao');
   plataforma5.setScale(1).refreshBody();
-
+*/
 
   //PRIMEIRA
+  /*
   let plataforma1 = plataformas.create(-100, 427, 'chao');
   plataforma1.setScale(1).refreshBody();
   
@@ -118,7 +119,7 @@ function create() {
   plataforma15.setScale(1).refreshBody();
   let plataforma16 = plataformas.create(1467, 427, 'chao');
   plataforma16.setScale(1).refreshBody();
-
+*/
 
   
 
@@ -145,8 +146,10 @@ function create() {
   this.physics.add.collider(tiro,vox);
   this.physics.add.collider(chao,vox);
   
-  Plataformas.createPlataformas(this);
+  Plataformas.createPlataformas(this, personagem);
 
+
+  this.physics.add.collider(Plataformas,personagem)
   vox.setCollideWorldBounds(true);
   vox.body.setSize(0,0,0,40);
 
@@ -155,62 +158,9 @@ function create() {
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
   this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
 
-  /* remove apos 2 push
-  this.anims.create({
-    key : 'parado',
-    frames : this.anims.generateFrameNumbers('personagem', { start : 1, end : 3}),
-    frameRate: 2,
-    repeat : -1
-  });
 
-  this.anims.create({
-    key : 'direita',
-    frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
-    frameRate: 10,
-    repeat : -1
-  });
-  
-  this.anims.create({
-    key : 'esquerda',
-    flipX :true,
-    frames : this.anims.generateFrameNumbers('personagem', { start : 11, end : 19}),
-    frameRate: 10,
-    repeat : -1
-  });
-
-  this.anims.create({
-    key : 'pulo',
-    
-    frames : this.anims.generateFrameNumbers('personagem', { start : 20, end : 23}),
-    frameRate: 10,
-   
-    repeat : -1
-  });
-  
-  this.anims.create({
-    key :'morte',
-    frames :this.anims.generateFrameNumbers('personagem',{start:46,end:52}),
-    frameRate :10,
-    repeat :-1
-  })
-  */
   this.personagem = personagem;
-/* remove apos 2 push
-  this.anims.create({
-    key : 'vox_esquerda',
-    flipX:true,
-    frames : this.anims.generateFrameNumbers('vox', { start : 1, end : 11}),
-    frameRate:10,
-    repeat : -1
-  });
 
-  this.anims.create({
-    key : 'vox_direita',
-    frames : this.anims.generateFrameNumbers('vox', { start : 1,end:13}),
-    frameRate: 10,
-    repeat : -1
-  });
-  */
 
   this.vox = vox;
 
