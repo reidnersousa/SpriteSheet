@@ -1,5 +1,5 @@
 import MyScene from './fase2.js';
-import Monstro from './monstro.js';
+import Monstro from './inimigos/monstro.js';
 import { Plataformas}  from './cenario/plataformas.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
@@ -81,52 +81,8 @@ function create() {
 
   let plataforma14 = plataformas.create(270, 380, 'chao');
   plataforma14.setScale(1).refreshBody();
-  /*
-  let plataforma3 = plataformas.create(65, 200, 'chao');
-  plataforma3.setScale(1).refreshBody();
-  let plataforma4 = plataformas.create(395, 200, 'chao');
-  plataforma4.setScale(1).refreshBody();
-  let plataforma5 = plataformas.create(525, 332, 'chao');
-  plataforma5.setScale(1).refreshBody();
-*/
 
-  //PRIMEIRA
-  /*
-  let plataforma1 = plataformas.create(-100, 427, 'chao');
-  plataforma1.setScale(1).refreshBody();
-  
-  let plataforma6 = plataformas.create(654, 332, 'chao');
-  plataforma6.setScale(1).refreshBody();
-  let plataforma7 = plataformas.create(654, 284, 'chao');
-  plataforma7.setScale(1).refreshBody();
-  let plataforma8 = plataformas.create(830, 427, 'chao');
-  plataforma8.setScale(1).refreshBody();
-  let plataforma9 = plataformas.create(1034, 262, 'chao');
-  plataforma9.setScale(1).refreshBody();
-  
-  let plataforma12 = plataformas.create(270, 427, 'chao');
-  plataforma12.setScale(1).refreshBody();
-  let plataforma13 = plataformas.create(397, 427, 'chao');
-  plataforma13.setScale(1).refreshBody();
-  
-  
-  let plataforma17 = plataformas.create(900, 350, 'chao');
-  plataforma17.setScale(1).refreshBody();
-  let plataforma18 = plataformas.create(200, 200, 'chao');
-  plataforma18.setScale(1).refreshBody();
-
-  let plataforma15 = plataformas.create(1340, 427, 'chao');
-  plataforma15.setScale(1).refreshBody();
-  let plataforma16 = plataformas.create(1467, 427, 'chao');
-  plataforma16.setScale(1).refreshBody();
-*/
-
-  
-
-  const chao = this.physics.add.staticImage(397, 380, 'chao');
-  chao.body.setSize(129, 46, 0, 0);
-  this.physics.add.collider(chao,personagem );
-  
+ 
   
   var personagem = this.physics.add.sprite(-100, 330, 'personagem');
   var tiro = this.physics.add.sprite(0, 0, 'tiro');
@@ -136,20 +92,20 @@ function create() {
   var vox4 = this.physics.add.sprite(1300, 370, 'vox');
 
 
-  this.physics.add.collider(personagem, chao);
-  this.physics.add.collider(plataformas, personagem);
-  this.physics.add.collider(plataformas, personagem);
+
+ // this.physics.add.collider(plataformas, personagem);
+  //this.physics.add.collider(plataformas, personagem);
 
   
  
-  this.physics.add.collider(plataformas,vox);
+ // this.physics.add.collider(plataformas,vox);
   this.physics.add.collider(tiro,vox);
-  this.physics.add.collider(chao,vox);
+ 
   
-  Plataformas.createPlataformas(this, personagem);
+  Plataformas.createPlataformas(this, personagem,vox);
 
 
-  this.physics.add.collider(Plataformas,personagem)
+  //this.physics.add.collider(Plataformas,personagem)
   vox.setCollideWorldBounds(true);
   vox.body.setSize(0,0,0,40);
 
@@ -251,7 +207,7 @@ this.time.addEvent({
 });
 
 
-}
+} //fim da função create
 
 
 
@@ -282,7 +238,11 @@ function update() {
   personagem.body.setGravity(0, 300);
 
   var vox = this.vox;
+  
+ 
   vox.body.setGravity(0, 300);
+  
+  
 
   if (personagem.y > game.config.height) {
     console.log("Personagem caiu");
@@ -299,6 +259,9 @@ function update() {
 
   if (escolha == true) {
     voxMovimentosEsquerda(vox);
+   
+    
+
     vox.anims.play('vox_esquerda', true);
     vox.flipX = true;
   }
