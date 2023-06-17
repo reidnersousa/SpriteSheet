@@ -1,6 +1,5 @@
 //animationMonstro.js
 export class AnimationMonstro {
-
   
   static createAnimations(scene) {
 
