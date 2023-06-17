@@ -1,5 +1,5 @@
 import MyScene from './fase2.js';
-import Monstro from './inimigos/monstro.js';
+import {Monstro} from './inimigos/monstro.js';
 import { Plataformas}  from './cenario/plataformas.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
@@ -67,49 +67,38 @@ function create() {
 
   AnimationMonstro.createAnimations(this);
   AnimationPersonagem.createAnimations(this);
-  
+ 
  
   
   
   const fundo = this.add.image(620, 300, 'fundo').setScale(1.0);
+  
+  Monstro.createMonstro(this);
+
+ 
+  
 
   // Define o scrollFactor do fundo como zero
   fundo.setScrollFactor(0);
 
   
-  const plataformas = this.physics.add.staticGroup();
-
-  let plataforma14 = plataformas.create(270, 380, 'chao');
-  plataforma14.setScale(1).refreshBody();
-
- 
   
   var personagem = this.physics.add.sprite(-100, 330, 'personagem');
   var tiro = this.physics.add.sprite(0, 0, 'tiro');
   var vox = this.physics.add.sprite(300, 250, 'vox');
-  var vox2 = this.physics.add.sprite(10, 150, 'vox');
-  var vox3 = this.physics.add.sprite(620, 230, 'vox');
+ 
   var vox4 = this.physics.add.sprite(1300, 370, 'vox');
 
 
-
- // this.physics.add.collider(plataformas, personagem);
-  //this.physics.add.collider(plataformas, personagem);
-
-  
- 
- // this.physics.add.collider(plataformas,vox);
   this.physics.add.collider(tiro,vox);
  
   
   Plataformas.createPlataformas(this, personagem,vox);
 
 
-  //this.physics.add.collider(Plataformas,personagem)
   vox.setCollideWorldBounds(true);
   vox.body.setSize(0,0,0,40);
 
-  
   
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
   this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
@@ -120,21 +109,21 @@ function create() {
 
   this.vox = vox;
 
-this.cartucho = this.physics.add.image(270, 321, 'cartucho');
-this.cartucho.setCollideWorldBounds(true);
-this.cartucho.setScale(0.05); // Reduzir o tamanho pela metade
+  this.cartucho = this.physics.add.image(270, 321, 'cartucho');
+  this.cartucho.setCollideWorldBounds(true);
+  this.cartucho.setScale(0.05); // Reduzir o tamanho pela metade
 
 // Configurar a colisão do personagem com o cartucho
-this.physics.add.collider(this.personagem, this.cartucho, this.pegarCartucho, null, this);
+  this.physics.add.collider(this.personagem, this.cartucho, this.pegarCartucho, null, this);
   
   
-var pontuacao = 0;
-var pontuacaoTextBandeira = this.add.text(16, 16, 'Pontuação: 0', { fontSize: '32px', fill: '#000' });
-pontuacaoTextBandeira.setScrollFactor(0);
-pontuacaoTextBandeira.setOrigin(0, 0);
-textoVidas = this.add.text(16, 48, 'Vidas: ' + vidas, { fontSize: '32px', fill: '#000' }); // Ajuste as coordenadas Y para 48
-textoVidas.setScrollFactor(0);
-textoVidas.setOrigin(0, 0);
+  var pontuacao = 0;
+  var pontuacaoTextBandeira = this.add.text(16, 16, 'Pontuação: 0', { fontSize: '32px', fill: '#000' });
+  pontuacaoTextBandeira.setScrollFactor(0);
+  pontuacaoTextBandeira.setOrigin(0, 0);
+  textoVidas = this.add.text(16, 48, 'Vidas: ' + vidas, { fontSize: '32px', fill: '#000' }); // Ajuste as coordenadas Y para 48
+  textoVidas.setScrollFactor(0);
+  textoVidas.setOrigin(0, 0);
 
 
 
@@ -258,10 +247,7 @@ function update() {
   }
 
   if (escolha == true) {
-    voxMovimentosEsquerda(vox);
-   
-    
-
+    voxMovimentosEsquerda(vox)
     vox.anims.play('vox_esquerda', true);
     vox.flipX = true;
   }
