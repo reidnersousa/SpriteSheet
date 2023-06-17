@@ -1,21 +1,42 @@
 
 // monstro.js
+import {MonstroGrupo} from './monstroGrupo.js';
+
+
+function voxMovimentosDireita(vox){
+  vox.setVelocityX(25);
+  qtdChamadas++;
+  
+  if(qtdChamadas == 150){
+    escolha = true;
+  }
+}
+
+function voxMovimentosEsquerda(vox){
+  vox.setVelocityX(-25);
+  qtdChamadas--;
+  if(qtdChamadas == -150){
+    escolha = false;
+  }
+}
 
 export class Monstro  {
   static createMonstro(scene){
 
-  const monstros = scene.physics.add.staticGroup();
-
-  var vox2 = scene.physics.add.sprite(10, 150, 'vox');
-  monstros.add(vox2);
  
-  var vox3 = scene.physics.add.sprite(620, 230, 'vox');
-  monstros.add(vox3);
+ 
+  const monstrosGroup = new MonstroGrupo(scene);
 
-  //voxMovimentosDireita(vox2);
-  vox2.anims.play('vox_direita', true);
-  vox2.flipX = false;
-  
+  // Adiciona sprites de monstro ao grupo
+  monstrosGroup.addMonstro(10, 150, 'vox');
+  monstrosGroup.addMonstro(620, 230, 'vox');
+  monstrosGroup.addMonstro(1300,370,'vox');
+     
+
+  // Inicia a animação 'vox_direita' em todos os sprites de monstro
+  monstrosGroup.playAnimation('vox_direita');
+  monstrosGroup.playAnimation('vox_esquerda');
+
 
  
 

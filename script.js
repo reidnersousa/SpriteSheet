@@ -68,26 +68,21 @@ function create() {
   AnimationMonstro.createAnimations(this);
   AnimationPersonagem.createAnimations(this);
  
- 
-  
   
   const fundo = this.add.image(620, 300, 'fundo').setScale(1.0);
   
   Monstro.createMonstro(this);
 
  
-  
-
   // Define o scrollFactor do fundo como zero
   fundo.setScrollFactor(0);
-
-  
+ 
   
   var personagem = this.physics.add.sprite(-100, 330, 'personagem');
   var tiro = this.physics.add.sprite(0, 0, 'tiro');
   var vox = this.physics.add.sprite(300, 250, 'vox');
  
-  var vox4 = this.physics.add.sprite(1300, 370, 'vox');
+
 
 
   this.physics.add.collider(tiro,vox);
