@@ -1,5 +1,8 @@
 import MyScene from './fase2.js';
-import {Monstros} from './inimigos/monstro.js';
+// script.js
+import { Monstro } from './inimigos/monstro.js';
+
+
 import { Plataformas}  from './cenario/plataformas.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
@@ -71,7 +74,7 @@ function create() {
   
   const fundo = this.add.image(620, 300, 'fundo').setScale(1.0);
   
-  Monstros.createMonstro(this);
+  const monstros = new Monstro(this);
 
  
   // Define o scrollFactor do fundo como zero
@@ -384,4 +387,3 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-
