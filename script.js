@@ -73,9 +73,10 @@ function create() {
  
   
   const fundo = this.add.image(620, 300, 'fundo').setScale(1.0);
-  
-  const monstros = new Monstro(this);
 
+  this.monstros = new Monstro(this);
+  
+  this.monstros.createMonstro();
  
   // Define o scrollFactor do fundo como zero
   fundo.setScrollFactor(0);
@@ -203,6 +204,7 @@ function voxMovimentosDireita(vox){
   qtdChamadas++;
   
   
+  
   if(qtdChamadas == 150){
     escolha = true;
   }
@@ -223,10 +225,13 @@ var quantidadeTiros = 2;
 var pegouCartuchos = false;
 
 function update() {
- 
+
+ this.monstros.updateMonstro();
+
+  
   let cursors = this.input.keyboard.createCursorKeys();
   var personagem = this.personagem;
-  var Monstros =this.Monstros;
+  
   personagem.body.setGravity(0, 300);
 
   var vox = this.vox;
