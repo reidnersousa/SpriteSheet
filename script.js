@@ -1,5 +1,5 @@
 import MyScene from './fase2.js';
-import {Monstro} from './inimigos/monstro.js';
+import {Monstros} from './inimigos/monstro.js';
 import { Plataformas}  from './cenario/plataformas.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
@@ -71,7 +71,7 @@ function create() {
   
   const fundo = this.add.image(620, 300, 'fundo').setScale(1.0);
   
-  Monstro.createMonstro(this);
+  Monstros.createMonstro(this);
 
  
   // Define o scrollFactor do fundo como zero
@@ -184,7 +184,7 @@ function criarMeteoro() {
 
 
 this.time.addEvent({
-  delay: 2000,
+  delay: 1000,
   loop: true,
   callback: criarMeteoro,
   callbackScope: this
@@ -199,10 +199,13 @@ function voxMovimentosDireita(vox){
   vox.setVelocityX(25);
   qtdChamadas++;
   
+  
   if(qtdChamadas == 150){
     escolha = true;
   }
 }
+
+
 
 function voxMovimentosEsquerda(vox){
   vox.setVelocityX(-25);
@@ -217,8 +220,10 @@ var quantidadeTiros = 2;
 var pegouCartuchos = false;
 
 function update() {
+ 
   let cursors = this.input.keyboard.createCursorKeys();
   var personagem = this.personagem;
+  var Monstros =this.Monstros;
   personagem.body.setGravity(0, 300);
 
   var vox = this.vox;
@@ -237,6 +242,7 @@ function update() {
 
   if (escolha == false) {
     voxMovimentosDireita(vox);
+   
     vox.anims.play('vox_direita', true);
     vox.flipX = false;
   }
@@ -244,6 +250,8 @@ function update() {
   if (escolha == true) {
     voxMovimentosEsquerda(vox)
     vox.anims.play('vox_esquerda', true);
+    
+    
     vox.flipX = true;
   }
 

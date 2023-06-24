@@ -1,4 +1,5 @@
 
+
 // monstro.js
 import {MonstroGrupo} from './monstroGrupo.js';
 
@@ -20,7 +21,7 @@ function voxMovimentosEsquerda(vox){
   }
 }
 
-export class Monstro  {
+export class Monstros  {
   static createMonstro(scene){
 
  
@@ -32,14 +33,22 @@ export class Monstro  {
   monstrosGroup.addMonstro(620, 230, 'vox');
   monstrosGroup.addMonstro(1300,370,'vox');
      
-
-  // Inicia a animação 'vox_direita' em todos os sprites de monstro
+  //criar uma condição para alterna 
+  //entre os 2
+  
+  monstrosGroup.moveMonstros(25);
   monstrosGroup.playAnimation('vox_direita');
+  
+  
   monstrosGroup.playAnimation('vox_esquerda');
 
-
+  return monstrosGroup;
  
 
   }
+ 
+  
+ 
+  
 
 }
