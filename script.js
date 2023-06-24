@@ -226,7 +226,7 @@ var pegouCartuchos = false;
 
 function update() {
 
- this.monstros.updateMonstro();
+
 
   
   let cursors = this.input.keyboard.createCursorKeys();
@@ -250,12 +250,15 @@ function update() {
 
   if (escolha == false) {
     voxMovimentosDireita(vox);
-   
+    this.monstros.updateMonstro();
+    
     vox.anims.play('vox_direita', true);
     vox.flipX = false;
   }
 
   if (escolha == true) {
+   
+    this.monstros.updateMonstroEsquerda();
     voxMovimentosEsquerda(vox)
     vox.anims.play('vox_esquerda', true);
     

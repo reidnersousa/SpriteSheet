@@ -13,13 +13,21 @@ export class Monstro extends MonstroGrupo {
     this.addMonstro(10, 150, 'vox');
     this.addMonstro(620, 230, 'vox');
     this.addMonstro(1300, 370, 'vox');
-    this.playAnimation('vox_direita');
+    
   }
   updateMonstro(){
     this.moveMonstros(25);
-    
+    this.playAnimation('vox_direita');
     console.log("teste");
+
+    
   }
+  updateMonstroEsquerda(){
+    this.moveMonstros(-25);
+    this.playAnimation('vox_esquerda');
+    console.log("esquerda");
+  }
+ 
 }
 
   

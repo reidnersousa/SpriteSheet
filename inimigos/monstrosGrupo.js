@@ -21,8 +21,8 @@ export class MonstroGrupo {
   }
   
   playAnimation(animationKey) {
-    this.qtd++;
-    console.log(this.qtd);
+    
+    console.log(animationKey);
     this.monstros.children.each((monstro) => {
       monstro.anims.play(animationKey, true);
       monstro.flipX = (animationKey === 'vox_esquerda');
