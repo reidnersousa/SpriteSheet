@@ -22,7 +22,7 @@ export class MonstroGrupo {
   
   playAnimation(animationKey) {
     
-    console.log(animationKey);
+    
     this.monstros.children.each((monstro) => {
       monstro.anims.play(animationKey, true);
       monstro.flipX = (animationKey === 'vox_esquerda');

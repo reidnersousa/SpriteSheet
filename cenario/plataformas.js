@@ -1,8 +1,8 @@
 
 export class Plataformas {
-  static createPlataformas(scene, personagem,vox) {
+  static createPlataformas(scene, personagem,vox,monstros) {
     const plataformas_cenario = scene.physics.add.staticGroup();
-
+    console.log("plata",monstros)
 
 
     let plataforma14 = plataformas_cenario.create(270, 380, 'chao');
@@ -54,6 +54,7 @@ export class Plataformas {
     
     scene.physics.add.collider(personagem, plataformas_cenario);
     scene.physics.add.collider(vox,plataformas_cenario);
+    scene.physics.add.collider(plataformas_cenario,monstros);
   }
 }
 

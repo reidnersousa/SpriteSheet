@@ -60,7 +60,9 @@ function matarVox(personagem, vox) {
 
 function acertaTiro(tiro, vox) {
   vox.disableBody(true, true);
+ 
 }
+
 
 
 
@@ -77,7 +79,8 @@ function create() {
   this.monstros = new Monstro(this);
   
   this.monstros.createMonstro();
- 
+
+  console.log(this.monstros);
   // Define o scrollFactor do fundo como zero
   fundo.setScrollFactor(0);
  
@@ -90,18 +93,22 @@ function create() {
 
 
   this.physics.add.collider(tiro,vox);
+  this.physics.add.collider(tiro,this.monstros);
  
   
-  Plataformas.createPlataformas(this, personagem,vox);
+  
+  Plataformas.createPlataformas(this, personagem,vox,this.monstros);
 
 
   vox.setCollideWorldBounds(true);
+  
   vox.body.setSize(0,0,0,40);
 
   
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
+  
   this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
-
+ 
 
   this.personagem = personagem;
 
@@ -114,6 +121,7 @@ function create() {
 
 // Configurar a colisão do personagem com o cartucho
   this.physics.add.collider(this.personagem, this.cartucho, this.pegarCartucho, null, this);
+  this.physics.add.collider(this.personagem,this.monstros);
   
   
   var pontuacao = 0;
@@ -221,7 +229,7 @@ function voxMovimentosEsquerda(vox){
 }
 
 var escolha = false;
-var quantidadeTiros = 2;
+var quantidadeTiros = 4;
 var pegouCartuchos = false;
 
 function update() {
