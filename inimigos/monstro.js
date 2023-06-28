@@ -18,14 +18,20 @@ export class Monstro extends MonstroGrupo {
   updateMonstro(){
     this.moveMonstros(25);
     this.playAnimation('vox_direita');
-   // console.log("teste");
+   
 
     
   }
   updateMonstroEsquerda(){
     this.moveMonstros(-55);
     this.playAnimation('vox_esquerda');
-    //console.log("esquerda");
+   
+  }
+  createMonstroCollide(plataformas,personagem){
+    
+    this.collideMonstros();
+    this.collideMonstrosPlataformas(plataformas);
+    this.collideMonstrosPersonagem(personagem);
   }
  
 }

@@ -6,6 +6,7 @@ export class MonstroGrupo {
     this.monstros = scene.physics.add.group(); // Alteração para group
     this.i =0;
     this.escolha =true;
+    
   }
 
   
@@ -18,6 +19,27 @@ export class MonstroGrupo {
     this.monstros.setVelocityX(velocityX);
    
     
+  }
+  collideMonstros() {
+    this.monstros.getChildren().forEach((monstro) => {
+      monstro.body.setCollideWorldBounds(true);
+    });
+  }
+  collideMonstrosPlataformas(plataformas) {
+   
+    
+    this.monstros.getChildren().forEach((monstro) => {
+      this.scene.physics.add.collider(monstro, plataformas);
+    });
+  
+  }
+  collideMonstrosPersonagem(personagem) {
+   
+    
+    this.monstros.getChildren().forEach((monstro) => {
+      this.scene.physics.add.collider(monstro, personagem);
+    });
+  
   }
   
   playAnimation(animationKey) {

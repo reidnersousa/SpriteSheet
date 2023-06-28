@@ -2,7 +2,7 @@
 export class Plataformas {
   static createPlataformas(scene, personagem,vox,monstros) {
     const plataformas_cenario = scene.physics.add.staticGroup();
-    console.log("plata",monstros)
+    
 
 
     let plataforma14 = plataformas_cenario.create(270, 380, 'chao');
@@ -37,7 +37,7 @@ export class Plataformas {
   
     let plataforma12 = plataformas_cenario.create(270, 427, 'chao');
     plataforma12.setScale(1).refreshBody();
-    let plataforma13 = plataformas_cenario.create(397, 427, 'chao');
+    let plataforma13 = plataformas_cenario.create(400, 427, 'chao');
     plataforma13.setScale(1).refreshBody();
     
     
@@ -54,7 +54,9 @@ export class Plataformas {
     
     scene.physics.add.collider(personagem, plataformas_cenario);
     scene.physics.add.collider(vox,plataformas_cenario);
-    scene.physics.add.collider(plataformas_cenario,monstros);
+    
+    
+    return plataformas_cenario;
   }
 }
 

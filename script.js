@@ -77,13 +77,13 @@ function create() {
   const fundo = this.add.image(620, 300, 'fundo').setScale(1.0);
 
   this.monstros = new Monstro(this);
-  
   this.monstros.createMonstro();
+  
+ 
 
-  console.log(this.monstros);
+
   // Define o scrollFactor do fundo como zero
   fundo.setScrollFactor(0);
- 
   
   var personagem = this.physics.add.sprite(-100, 330, 'personagem');
   var tiro = this.physics.add.sprite(0, 0, 'tiro');
@@ -96,10 +96,11 @@ function create() {
   this.physics.add.collider(tiro,this.monstros);
  
   
+  const plataformas =Plataformas.createPlataformas(this, personagem,vox,this.monstros);
+  this.monstros.createMonstroCollide(plataformas,personagem);
   
-  Plataformas.createPlataformas(this, personagem,vox,this.monstros);
-
-
+  
+  
   vox.setCollideWorldBounds(true);
   
   vox.body.setSize(0,0,0,40);
@@ -111,8 +112,6 @@ function create() {
  
 
   this.personagem = personagem;
-
-
   this.vox = vox;
 
   this.cartucho = this.physics.add.image(270, 321, 'cartucho');
@@ -385,10 +384,10 @@ const config = {
     autoCenter : Phaser.Scale.CENTER_BOTH,
     physics: {
         default: 'arcade',
-        arcade: {/*
+        arcade: {
             gravity: {
                 y: 300
-            },*/
+            },
             debug: true
         }
     },
