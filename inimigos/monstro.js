@@ -27,11 +27,19 @@ export class Monstro extends MonstroGrupo {
     this.playAnimation('vox_esquerda');
    
   }
-  createMonstroCollide(plataformas,personagem){
+
+   
+  createMonstroCollide(plataformas,personagem,tiro){
     
     this.collideMonstros();
     this.collideMonstrosPlataformas(plataformas);
     this.collideMonstrosPersonagem(personagem);
+    //console.log('monstro.js tiro',tiro);
+    this.collideMonstrosTiro(tiro);
+  }
+  createMonstroDisable(personagem,matarVox){
+    this.disableMonstro(personagem,matarVox);
+    //console.log('tiro',tiro,'acertaTiro',acertaTiro);
   }
  
 }

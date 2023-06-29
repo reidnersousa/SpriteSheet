@@ -59,6 +59,7 @@ function matarVox(personagem, vox) {
 }
 
 function acertaTiro(tiro, vox) {
+  console.log('vox',vox);
   vox.disableBody(true, true);
  
 }
@@ -93,11 +94,11 @@ function create() {
 
 
   this.physics.add.collider(tiro,vox);
-  this.physics.add.collider(tiro,this.monstros);
+  
  
   
   const plataformas =Plataformas.createPlataformas(this, personagem,vox,this.monstros);
-  this.monstros.createMonstroCollide(plataformas,personagem);
+  this.monstros.createMonstroCollide(plataformas,personagem,tiro);
   
   
   
@@ -109,6 +110,8 @@ function create() {
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
   
   this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
+  this.monstros.createMonstroDisable(personagem,matarVox);
+
  
 
   this.personagem = personagem;
@@ -310,6 +313,7 @@ function update() {
   }
 
   var tiro;
+ 
   if (this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T).isDown) {
     if (quantidadeTiros > 0) {
       var posAstronautaX = personagem.x;
