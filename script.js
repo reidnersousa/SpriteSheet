@@ -110,7 +110,7 @@ function create() {
   this.physics.add.overlap(personagem, vox, matarVox, null, this);
   
   this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
-  this.monstros.createMonstroDisable(personagem,matarVox);
+  this.monstros.createPersonagemDisable(personagem,matarVox);
 
  
 
@@ -330,6 +330,7 @@ function update() {
       }
 
       this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
+     
 
       quantidadeTiros--; // Reduzir a quantidade de tiros
       console.log("Quantidade de tiros restantes:", quantidadeTiros);

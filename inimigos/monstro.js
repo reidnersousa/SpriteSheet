@@ -37,10 +37,11 @@ export class Monstro extends MonstroGrupo {
     //console.log('monstro.js tiro',tiro);
     this.collideMonstrosTiro(tiro);
   }
-  createMonstroDisable(personagem,matarVox){
-    this.disableMonstro(personagem,matarVox);
+  createPersonagemDisable(personagem,matarVox){
+    this.disablePersonagem(personagem,matarVox);
     //console.log('tiro',tiro,'acertaTiro',acertaTiro);
   }
+  
  
 }
 

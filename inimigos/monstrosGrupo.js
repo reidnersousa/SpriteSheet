@@ -43,15 +43,14 @@ export class MonstroGrupo {
   }
   collideMonstrosTiro(tiro) {
    
-    console.log('tiro monstrosGrupo.js',tiro);
     this.monstros.getChildren().forEach((monstro) => {
-      console.log('monstro',monstro);
+      
       this.scene.physics.add.collider(monstro, tiro);
     });
   
   }
   
-  disableMonstro(personagem,matarVox){
+  disablePersonagem(personagem,matarVox){
     this.monstros.getChildren().forEach((monstro) =>{
       
       this.scene.physics.add.overlap(personagem, monstro, matarVox, null, this);
