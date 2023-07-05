@@ -11,11 +11,11 @@ export class Monstro extends MonstroGrupo {
   }
   createMonstro(){
     this.addMonstro(10, 150, 'vox');
-    
-   this.addMonstro(122,150,'vox');
-   this.addMonstro(300, 250, 'vox');
-   this.addMonstro(1300, 370, 'vox');
-    
+    this.addMonstro(300,250,'vox');  
+    this.addMonstro(122,150,'vox');
+    this.addMonstro(300, 250, 'vox');
+    this.addMonstro(1300, 370, 'vox');
+  
   }
   updateMonstro(){
     this.moveMonstros(25);
