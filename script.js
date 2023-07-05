@@ -63,6 +63,10 @@ function acertaTiro(tiro, vox) {
   vox.disableBody(true, true);
  
 }
+function acertaTiroMonstros(tiro) {
+  console.log("monstros");
+ 
+}
 
 
 
@@ -120,7 +124,8 @@ function create() {
   this.cartucho = this.physics.add.image(270, 321, 'cartucho');
   this.cartucho.setCollideWorldBounds(true);
   this.cartucho.setScale(0.05); // Reduzir o tamanho pela metade
-
+  this.physics.add.collider(plataformas,this.cartucho);
+  
 // Configurar a colisão do personagem com o cartucho
   this.physics.add.collider(this.personagem, this.cartucho, this.pegarCartucho, null, this);
   this.physics.add.collider(this.personagem,this.monstros);
@@ -329,6 +334,11 @@ function update() {
         tiro.body.velocity.x = 500; // Tiro para a direita
       }
 
+     
+      this.monstros.teste();
+      
+      this.monstros.testeMonstroDisable(tiro,acertaTiroMonstros);
+      //this.physics.add.overlap(tiro,this.monstros,acertaTiroMonstros,null,this);
       this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
      
 
@@ -344,6 +354,7 @@ function update() {
     quantidadeTiros = 2; // Recarregar a quantidade de tiros
     pegouCartuchos = false; // Resetar a flag de pegouCartuchos
     console.log("Munição recarregada. Quantidade de tiros:", quantidadeTiros);
+   
   }
 
   this.physics.overlap(personagem, this.meteoros, colidirMeteoro, null, this);

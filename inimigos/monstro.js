@@ -11,6 +11,7 @@ export class Monstro extends MonstroGrupo {
   }
   createMonstro(){
     this.addMonstro(10, 150, 'vox');
+    this.addMonstro(122,150,'vox');
     this.addMonstro(300, 250, 'vox');
     this.addMonstro(1300, 370, 'vox');
     
@@ -42,7 +43,19 @@ export class Monstro extends MonstroGrupo {
     //console.log('tiro',tiro,'acertaTiro',acertaTiro);
   }
   
+  testeMonstroDisable(tiro,acertaTiroM){
+    this.disableMonstro(tiro,acertaTiroM);
+  }
+
+ 
+  teste(){
+    console.log("OII");
+  }
  
 }
 
-  
+
+
+
+
+
