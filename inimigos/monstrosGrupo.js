@@ -1,4 +1,7 @@
 //inimigos/monstroGrupo.js
+
+
+
 export class MonstroGrupo {
   
   constructor(scene) {
@@ -58,20 +61,16 @@ export class MonstroGrupo {
     });
   }
 
-  disableMonstro(tiro,acertaTiroM){
-    this.monstros.getChildren().forEach((monstro) =>{
-      
-      this.scene.physics.add.overlap(tiro, monstro, acertaTiroM, null, this);
-      if (monstro.x && monstro.y == tiro.x && tiro.y){
-        console.log("monnstro;x");
-      }
-//      monstro.disableBody(true,true);
-      console.log("Teeste",monstro.x,monstro.y,tiro.x,tiro.y);
-      //TODO criar um metodo que faça que monstro e tiro quando coliderem monstrro morre
-      
-      
-    });
-    
+
+  
+
+
+  disableMonstro(tiro) {
+  this.monstros.getChildren().forEach((monstro) => {
+    this.scene.physics.add.overlap(tiro, monstro, (tiro, monstro) => {
+      acertaTiroM(monstro);
+    }, null, this);
+  });
   }
   
   playAnimation(animationKey) {
@@ -82,7 +81,15 @@ export class MonstroGrupo {
       monstro.flipX = (animationKey === 'vox_esquerda');
     });
   }
-  
+ 
 
  
 }
+
+
+ 
+
+function acertaTiroM(monstro) {
+    monstro.disableBody(true,true);
+   console.log("Colidem");
+} 

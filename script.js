@@ -335,10 +335,10 @@ function update() {
       }
 
      
-      this.monstros.teste();
       
-      this.monstros.testeMonstroDisable(tiro,acertaTiroMonstros);
-      //this.physics.add.overlap(tiro,this.monstros,acertaTiroMonstros,null,this);
+      
+      this.monstros.testeMonstroDisable(tiro);
+     
       this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
      
 
