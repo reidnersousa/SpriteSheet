@@ -4,8 +4,11 @@ import { Monstro } from './inimigos/monstro.js';
 
 
 import { Plataformas}  from './cenario/plataformas.js';
+import {Garrafas} from './cenario/garrafas.js';
+import { coletarGarrafas } from './funcoes/funcoes.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
+
 
 
 function preload() {
@@ -73,6 +76,10 @@ function acertaTiroMonstros(tiro) {
 
 function create() {
 
+ 
+
+
+
   textoVidas = this.add.text(16, 16, 'Vidas: ' + vidas, { fontSize: '32px', fill: '#000' });
 
   AnimationMonstro.createAnimations(this);
@@ -102,7 +109,10 @@ function create() {
  
   
   const plataformas =Plataformas.createPlataformas(this, personagem,vox,this.monstros);
+  const garrafas = Garrafas.createGarrafas(this,personagem,vox,this.monstros);
+  
   this.monstros.createMonstroCollide(plataformas,personagem,tiro);
+  this.physics.add.collider(plataformas,garrafas);
   
   
   
@@ -148,6 +158,7 @@ function create() {
   
     if(pontuacao === 300){
         this.scene.add('Fase2', MyScene, true, { x: 400, y: 800 });
+       
     }
     bandeira.destroy();
   }
@@ -166,6 +177,7 @@ function create() {
 
   // Adicione a colisão entre o personagem e a bandeira
   this.physics.add.overlap(personagem, bandeira, coletarBandeira, null, this);
+  this.physics.add.overlap(personagem,garrafas,coletarGarrafas,null,this);
 
   var bandeira1 = this.physics.add.staticImage(15, 165, 'bandeira');
   bandeira1.setScale(0.2);
@@ -201,6 +213,9 @@ function criarMeteoro() {
   meteoro.setScale(0.03); // Define o tamanho do meteoro (ajuste conforme necessário)
 }
 
+ 
+  
+  
 
 this.time.addEvent({
   delay: 1000,
@@ -337,7 +352,7 @@ function update() {
      
       
       
-      this.monstros.testeMonstroDisable(tiro);
+      this.monstros.monstroDisable(tiro);
      
       this.physics.add.overlap(tiro, vox, acertaTiro, null, this);
      
@@ -350,16 +365,18 @@ function update() {
   }
 
   // Verificar se o personagem pegou os cartuchos e recarregar
-  if (pegouCartuchos) {
+  if (pegouCartuchos) {  
     quantidadeTiros = 2; // Recarregar a quantidade de tiros
     pegouCartuchos = false; // Resetar a flag de pegouCartuchos
     console.log("Munição recarregada. Quantidade de tiros:", quantidadeTiros);
    
   }
+  this.physics.overlap(personagem, this.cartucho,pegarCartucho,null,this);
 
   this.physics.overlap(personagem, this.meteoros, colidirMeteoro, null, this);
 }
 function pegarCartucho(personagem, cartucho) {
+ 
   cartucho.disableBody(true, true); // Remover o cartucho do jogo
   pegouCartuchos = true; // Definir pegouCartuchos como true
   quantidadeTiros += 2; // Aumentar a quantidade de tiros em 2

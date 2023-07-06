@@ -44,7 +44,7 @@ export class Monstro extends MonstroGrupo {
     //console.log('tiro',tiro,'acertaTiro',acertaTiro);
   }
   
-  testeMonstroDisable(tiro){
+  monstroDisable(tiro){
     this.disableMonstro(tiro);
   }
 
