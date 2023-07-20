@@ -3,53 +3,95 @@ export class Plataformas {
   static createPlataformas(scene, personagem,vox,monstros) {
     const plataformas_cenario = scene.physics.add.staticGroup();
     
-
-
-    let plataforma14 = plataformas_cenario.create(270, 380, 'chao');
-    plataforma14.setScale(1).refreshBody();
-
-    let plataforma141 = plataformas_cenario.create(397, 380, 'chao');
-    plataforma141.setScale(1).refreshBody();
     
-    let plataforma3 = plataformas_cenario.create(65, 200, 'chao');
-    plataforma3.setScale(1).refreshBody();
-    let plataforma4 = plataformas_cenario.create(395, 200, 'chao');
-    plataforma4.setScale(1).refreshBody();
-    let plataforma5 = plataformas_cenario.create(525, 332, 'chao');
-    plataforma5.setScale(1).refreshBody();
 
-    let p1 = plataformas_cenario.create(130, 330, 'chao');
+    // create(x ,y) x linha e y coluna 
+
+     //bloco nivel 1    b1p1  b1 altura do bloco e p1 e a posição em relação ao eixo y
+    let b1p1 = plataformas_cenario.create(20, 200, 'chao');
+    b1p1.setScale(1).refreshBody();
+    let b1p2 = plataformas_cenario.create(200, 200, 'chao');
+    b1p2.setScale(1).refreshBody();
+
+   
+    let b1p3 = plataformas_cenario.create(397, 200, 'chao');
+    b1p3.setScale(1).refreshBody();
+    let b1p4 = plataformas_cenario.create(654, 200, 'chao');
+    b1p4.setScale(1).refreshBody();
+    let b1p5 = plataformas_cenario.create(830, 200, 'chao');
+    b1p5.setScale(1).refreshBody();
+    //bloco nivel 1
+
+    // bloco nivel 2
+    let b2p1 = plataformas_cenario.create(140, 333, 'chao');
+    b2p1.setScale(1).refreshBody();
+    let b2p2 = plataformas_cenario.create(525, 333, 'chao');
+    b2p2.setScale(1).refreshBody();
+    let b2p3 = plataformas_cenario.create(654, 333, 'chao');
+    b2p3.setScale(1).refreshBody();
+    //bloco nivel 2
+    
+ 
+
+  
+    let b3p1 = plataformas_cenario.create(270, 380, 'chao');
+    b3p1.setScale(1).refreshBody();
+
+    let b3p2 = plataformas_cenario.create(397, 380, 'chao');
+    b3p2.setScale(1).refreshBody();
+
+    let b3p3 = plataformas_cenario.create(1004, 380, 'chao');
+    b3p3.setScale(1).refreshBody();
+    
+
+
+  
+    let b4p1 = plataformas_cenario.create(140, 427, 'chao');
+    b4p1.setScale(1).refreshBody();
+
+    
+    
+    let b4p2 = plataformas_cenario.create(397, 427, 'chao');
+    b4p2.setScale(1).refreshBody();
+
+    let b4p3 = plataformas_cenario.create(525, 427, 'chao');
+    b4p3.setScale(1).refreshBody();
+
+     let b4p4 = plataformas_cenario.create(653, 427, 'chao');
+    b4p4.setScale(1).refreshBody();
+     
+    let b4p5 = plataformas_cenario.create(782, 427, 'chao');
+    b4p5.setScale(1).refreshBody();
+
+    let b4p5_5 = plataformas_cenario.create(900, 427, 'chao');
+    b4p5_5.setScale(1).refreshBody();
+    let b4p6 = plataformas_cenario.create(1340, 427, 'chao');
+    b4p6.setScale(1).refreshBody(); 
+    let b4p7 = plataformas_cenario.create(1467, 427, 'chao');
+    b4p7.setScale(1).refreshBody();
+   
+
+  
+    
 
    // let plataforma20 = plataformas_cenario.create(-100, 330, 'chao');
    // plataforma20.setScale(1).refreshBody();
     //PRIMEIRA
-    let plataforma1 = plataformas_cenario.create(-100, 427, 'chao');
-    plataforma1.setScale(1).refreshBody();
+   // let plataforma1 = plataformas_cenario.create(-100, 427, 'chao');
+    //plataforma1.setScale(1).refreshBody();
     
-    let plataforma6 = plataformas_cenario.create(654, 332, 'chao');
-    plataforma6.setScale(1).refreshBody();
-    let plataforma7 = plataformas_cenario.create(654, 284, 'chao');
-    plataforma7.setScale(1).refreshBody();
-    let plataforma8 = plataformas_cenario.create(830, 427, 'chao');
-    plataforma8.setScale(1).refreshBody();
-    let plataforma9 = plataformas_cenario.create(1034, 262, 'chao');
-    plataforma9.setScale(1).refreshBody();
+    
+    
+    
+    
   
-    let plataforma12 = plataformas_cenario.create(270, 427, 'chao');
-    plataforma12.setScale(1).refreshBody();
-    let plataforma13 = plataformas_cenario.create(400, 427, 'chao');
-    plataforma13.setScale(1).refreshBody();
     
     
-    let plataforma17 = plataformas_cenario.create(900, 350, 'chao');
-    plataforma17.setScale(1).refreshBody();
-    let plataforma18 = plataformas_cenario.create(200, 200, 'chao');
-    plataforma18.setScale(1).refreshBody();
+    
+    
+    
   
-    let plataforma15 = plataformas_cenario.create(1340, 427, 'chao');
-    plataforma15.setScale(1).refreshBody();
-    let plataforma16 = plataformas_cenario.create(1467, 427, 'chao');
-    plataforma16.setScale(1).refreshBody();
+    
 
     
     scene.physics.add.collider(personagem, plataformas_cenario);

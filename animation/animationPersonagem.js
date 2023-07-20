@@ -24,13 +24,15 @@ export class AnimationPersonagem {
     repeat : -1
   });
 
+  
+    
   scene.anims.create({
     key : 'pulo',
     
     frames : scene.anims.generateFrameNumbers('personagem', { start : 20, end : 23}),
     frameRate: 10,
    
-    repeat : -1
+    repeat : 0
   });
   
   scene.anims.create({

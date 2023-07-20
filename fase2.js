@@ -7,18 +7,26 @@ class MyScene extends Phaser.Scene {
     this.load.image('fundo_2', 'assets/fase2.png'); 
     this.load.spritesheet('personagem_2','assets/astronauta_laranja.png', { frameWidth:32.8, frameHeight:47.5 });
     this.load.spritesheet('vox_fase2','assets/monstro.png',{frameWidth:16,frameHeight:16});
-    
+    this.personagem_2 = null;
     
   } // fim da preload dentro da preload 
 
   create() {
-    console.log("create em MyScene");
-    this.add.image(620, 300, 'fundo_2').setScale(2.0);
+    
+     console.log("create em MyScene");
+
+    const fundoFixo = this.add.image(620, 300, 'fundo_2').setScale(2.9);
     const chao_2 = this.physics.add.staticImage(397, 380, 'chao_2');
     chao_2.body.setSize(129, 46, 0, 0);
 
+    // Configura o deslocamento da câmera para (0, 0)
+    this.cameras.main.setScroll(0, 0);
+
+    // Ajusta a posição do plano de fundo fixo
+    fundoFixo.setScrollFactor(0);
+
     const plataformas = this.physics.add.staticGroup();
-  
+
     let plataforma1 = plataformas.create(270, 380, 'chao_2');
     plataforma1.setScale(1).refreshBody();
   
@@ -71,34 +79,20 @@ class MyScene extends Phaser.Scene {
     let plataforma17 = plataformas.create(900, 350, 'chao_2');
     plataforma17.setScale(1).refreshBody();
 
-    this.physics.add.collider(chao_2,personagem_2 );
-    
     var personagem_2 = this.physics.add.sprite(100, 330, 'personagem_2');
-    
     this.personagem_2 = personagem_2;
-    
 
     this.physics.add.collider(chao_2, personagem_2);
     this.physics.add.collider(plataformas, personagem_2);
 
-
     var vox_fase2 = this.physics.add.sprite(300, 350, 'vox_fase2');
     this.vox_fase2 = vox_fase2;
-    this.physics.add.collider(chao_2,vox_fase2);
-    
-    vox_fase2.setCollideWorldBounds(false);
-    vox_fase2.body.setSize(0,0,0,40);
-    
-   
-    this.physics.add.collider(plataformas,vox_fase2);
 
-    
-     this.anims.create({
-        key : 'parado',
-        frames : this.anims.generateFrameNumbers('personagem_2', { start : 1, end : 3}),
-        frameRate: 2,
-        repeat : -1
-      });
+    this.physics.add.collider(chao_2, vox_fase2);
+    this.physics.add.collider(plataformas, vox_fase2);
+
+    vox_fase2.setCollideWorldBounds(false);
+    vox_fase2.body.setSize(0, 0, 0, 40);
 
   this.anims.create({
         key : 'direita',
@@ -136,22 +130,32 @@ class MyScene extends Phaser.Scene {
         repeat : -1
       });
 
+    this.cameras.main.startFollow(personagem_2);
+  this.cameras.main.setZoom(0.8); // Define o zoom da câmera para 80% do tamanho original
+  this.cameras.main.setFollowOffset(-100, 0); // Afasta a câmera 100 pixels para a esquerda
 
-    
+     
   } // fim da create dentro da create
 
   update() {
 
+    
 
 
 
-    let cursors = this.input.keyboard.createCursorKeys();
+let cursors = this.input.keyboard.createCursorKeys();
     var personagem_2 = this.personagem_2;
 
-    var vox_fase2 = this.vox_fase2;
-
+    if (personagem_2.y > this.sys.game.config.height) {
+      console.log("Personagem caiu");
+      personagem_2.enableBody(true, 100, 330, true, true);
+    }
     
-    
+    if ((cursors.space.isDown || cursors.up.isDown) && (personagem_2.body.onFloor() || personagem_2.jumpCount < 2)) {
+    personagem_2.setVelocityY(-250);
+    personagem_2.anims.play('pulo', true);
+    personagem_2.jumpCount++;
+  }
     if(cursors.left.isDown){
        personagem_2.setVelocityX(-160);
        personagem_2.anims.play('esquerda', true);
@@ -167,7 +171,7 @@ class MyScene extends Phaser.Scene {
     }
     else if(cursors.up.isDown && personagem_2.body.onFloor()){
       
-      personagem_2.setVelocityY(-160);
+      personagem_2.setVelocityY(-250);
 
     }
     else if(cursors.down.isDown){
@@ -178,7 +182,7 @@ class MyScene extends Phaser.Scene {
       // primeiro pulo
       console.log("Primeiro pulo ");
       personagem_2.anims.play('pulo', true);
-      personagem_2.setVelocityY(-300);
+      personagem_2.setVelocityY(-250);
      
       if (cursors.space.isDown &&  personagem_2.jumpCount < 2)     {
       // segundo pulo

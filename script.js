@@ -8,11 +8,12 @@ import {Garrafas} from './cenario/garrafas.js';
 import { coletarGarrafas } from './funcoes/funcoes.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
-
-
+import {Tempo} from "./funcoes/tempo.js";
+ 
 
 function preload() {
-  this.load.spritesheet('personagem','assets/astronauta_laranja.png', { frameWidth:32.8, frameHeight:47.5 });
+  this.load.spritesheet('personagem','assets/astronauta_laranja.png', { frameWidth:32.8, frameHeight:47 });
+ 
   
   this.load.image('chao', 'assets/chao.png'); 
   this.load.image('bandeira', 'assets/bandeira.png'); 
@@ -85,7 +86,7 @@ function create() {
   AnimationMonstro.createAnimations(this);
   AnimationPersonagem.createAnimations(this);
  
-  
+  this.tempo = new Tempo(this);
   const fundo = this.add.image(620, 300, 'fundo').setScale(1.0);
 
   this.monstros = new Monstro(this);
@@ -97,7 +98,7 @@ function create() {
   // Define o scrollFactor do fundo como zero
   fundo.setScrollFactor(0);
   
-  var personagem = this.physics.add.sprite(-100, 330, 'personagem');
+  var personagem = this.physics.add.sprite(450, 200, 'personagem');
   var tiro = this.physics.add.sprite(0, 0, 'tiro');
   var vox = this.physics.add.sprite(300, 250, 'vox');
  
@@ -110,7 +111,8 @@ function create() {
   
   const plataformas =Plataformas.createPlataformas(this, personagem,vox,this.monstros);
   const garrafas = Garrafas.createGarrafas(this,personagem,vox,this.monstros);
-  
+
+ 
   this.monstros.createMonstroCollide(plataformas,personagem,tiro);
   this.physics.add.collider(plataformas,garrafas);
   
@@ -133,10 +135,12 @@ function create() {
 
   this.cartucho = this.physics.add.image(270, 321, 'cartucho');
   this.cartucho.setCollideWorldBounds(true);
-  this.cartucho.setScale(0.05); // Reduzir o tamanho pela metade
+  this.cartucho.setScale(0.05);
   this.physics.add.collider(plataformas,this.cartucho);
+
+ 
   
-// Configurar a colisão do personagem com o cartucho
+
   this.physics.add.collider(this.personagem, this.cartucho, this.pegarCartucho, null, this);
   this.physics.add.collider(this.personagem,this.monstros);
   
@@ -149,22 +153,28 @@ function create() {
   textoVidas.setScrollFactor(0);
   textoVidas.setOrigin(0, 0);
 
-
-
+  
+  
 
   function coletarBandeira(personagem, bandeira) {
     pontuacao += 100;
     pontuacaoTextBandeira.setText('Pontuação: ' + pontuacao);
   
     if(pontuacao === 300){
-        this.scene.add('Fase2', MyScene, true, { x: 400, y: 800 });
+      this.scene.stop();
+      this.tempo.stop();
+      var seuTempo =this.tempo.obterDuracaoPercurso();
+      console.log("Seu tempo ",seuTempo);
+      
+      this.scene.add('Fase2', MyScene, true, { x: 400, y: 800 });
+      
        
     }
     bandeira.destroy();
   }
 
   // Criação da bandeira
-  var bandeira = this.physics.add.staticImage(900, 200, 'bandeira');
+  var bandeira = this.physics.add.staticImage(480, 250, 'bandeira');
   bandeira.setScale(0.2); // Ajusta o tamanho da bandeira
   bandeira.setScale(bandeira.scaleX * 0.2); // Diminui a escala atual em 5 vezes
 
@@ -177,7 +187,7 @@ function create() {
 
   // Adicione a colisão entre o personagem e a bandeira
   this.physics.add.overlap(personagem, bandeira, coletarBandeira, null, this);
-  this.physics.add.overlap(personagem,garrafas,coletarGarrafas,null,this);
+  
 
   var bandeira1 = this.physics.add.staticImage(15, 165, 'bandeira');
   bandeira1.setScale(0.2);
@@ -223,6 +233,7 @@ this.time.addEvent({
   callback: criarMeteoro,
   callbackScope: this
 });
+  
 
 
 } //fim da função create
@@ -256,8 +267,8 @@ var pegouCartuchos = false;
 
 function update() {
 
-
-
+  this.monstros.monstrosSetGravity();
+ 
   
   let cursors = this.input.keyboard.createCursorKeys();
   var personagem = this.personagem;
@@ -273,7 +284,7 @@ function update() {
 
   if (personagem.y > game.config.height) {
     console.log("Personagem caiu");
-    personagem.enableBody(true, -100, 330, true, true);
+    personagem.enableBody(true, 450, 200, true, true);
     personagemVivo = true;
     perderVida();
   }
@@ -310,27 +321,41 @@ function update() {
     personagem.setVelocityX(160);
     personagem.anims.play('direita', true);
     personagem.flipX = false;
-  } else if (cursors.up.isDown) {
+  } 
+  
+  
+  else if (cursors.up.isDown) {
     personagem.setVelocityY(-160);
     personagem.anims.play('morte', true);
   } else if (cursors.down.isDown) {
     personagem.setVelocity(0);
     personagem.anims.play('pulo', true);
-  } else if (cursors.space.isDown && personagem.body.onFloor()) {
+  }
+ 
+  
+  else if (cursors.space.isDown && personagem.body.onFloor()) {
     // primeiro pulo
     console.log("Primeiro pulo ");
     personagem.setVelocityY(-250);
     personagem.anims.play('pulo', true);
-  } else {
+  }
+  
+  
+  else {
     personagem.setVelocityX(0);
     personagem.anims.play('parado', false);
   }
-
+  
   if (personagemVivo === false) {
     console.log("Reviver");
-    personagem.enableBody(true, -100, 330, true, true);
-    personagemVivo = true; // Definir personagemVivo como true após o ressurgimento
+    personagem.anims.play('morte').once('animationcomplete', () => {
+      personagem.enableBody(true, 450, 250, true, true);
+      
+     });
+    personagemVivo = true;
   }
+  
+  
 
   var tiro;
  
@@ -340,7 +365,7 @@ function update() {
       var posAstronautaY = personagem.y;
 
       tiro = this.physics.add.sprite(posAstronautaX, posAstronautaY, 'tiro');
-      tiro.body.setGravity(0);
+     // tiro.body.setGravity(0);
 
       // Determinar a direção do tiro com base na direção em que o personagem está virado
       if (personagem.flipX) {
@@ -372,6 +397,8 @@ function update() {
    
   }
   this.physics.overlap(personagem, this.cartucho,pegarCartucho,null,this);
+ 
+
 
   this.physics.overlap(personagem, this.meteoros, colidirMeteoro, null, this);
 }
@@ -404,7 +431,8 @@ function colidirMeteoro(personagem, meteoro) {
     window.location.href = 'deadmenu.html';
   } else {
     // Respawn do personagem
-    personagem.enableBody(true, -100, 330, true, true);
+   
+    personagem.enableBody(true, 450, 200, true, true);
     personagemVivo = true;
   }
 }
@@ -418,10 +446,12 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {
+          /* 
+          gravity: {
                 y: 300
             },
-            debug: true
+          */
+            debug: false
         }
     },
     scene: {

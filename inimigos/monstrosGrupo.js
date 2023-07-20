@@ -36,6 +36,17 @@ export class MonstroGrupo {
     });
   
   }
+
+
+  setGravity() {
+  
+    this.monstros.getChildren().forEach((monstro) => {
+     
+      monstro.body.setGravity(0, 300);
+      
+    });
+  
+  }
   collideMonstrosPersonagem(personagem) {
    
     
@@ -91,5 +102,5 @@ export class MonstroGrupo {
 
 function acertaTiroM(monstro) {
     monstro.disableBody(true,true);
-   console.log("Colidem");
+  
 } 

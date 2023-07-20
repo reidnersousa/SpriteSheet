@@ -1,21 +1,36 @@
+// cenario/garrafas.js 
+import { coletarGarrafas } from '../funcoes/funcoes.js';
+
+
 
 export class Garrafas {
   static createGarrafas(scene, personagem,vox,monstros) {
     const garrafas_cenario = scene.physics.add.staticGroup();
     
 
-
-    let garrafa1 = garrafas_cenario.create(270, 300, 'bandeira');
-    garrafa1.setScale(0.04).refreshBody();
+    // ainda não ta usando 
+   let garrafa1 = garrafas_cenario.create(400, 300, 'bandeira');
+   garrafa1.setScale(0.1).refreshBody();
    
+   let garrafa2 = garrafas_cenario.create(270, 300, 'bandeira');
+   garrafa2.setScale(0.1).refreshBody();
+  
+    let garrafa3 = garrafas_cenario.create(500, 300, 'bandeira');
+    garrafa3.setScale(0.1).refreshBody();
+ 
    
 
-    
+
+  
+
    // scene.physics.add.collider(personagem, garrafas_cenario);
-   // scene.physics.add.collider(vox,garrafas_cenario);
-    
-    
+    scene.physics.add.collider(vox, garrafas_cenario);
+
+    // Corrigir o nome da variável para garrafas_cenario
+    scene.physics.add.overlap(personagem, garrafas_cenario, coletarGarrafas, null, scene);
+
     return garrafas_cenario;
+    
   }
 }
 

@@ -14,6 +14,7 @@ export class Monstro extends MonstroGrupo {
     this.addMonstro(300,250,'vox');  
     this.addMonstro(122,150,'vox');
     this.addMonstro(300, 250, 'vox');
+    this.addMonstro(781,370,'vox');
     this.addMonstro(1300, 370, 'vox');
   
   }
@@ -48,6 +49,9 @@ export class Monstro extends MonstroGrupo {
     this.disableMonstro(tiro);
   }
 
+  monstrosSetGravity(){
+    this.setGravity();
+  }
  
   teste(){
     console.log("OII");
