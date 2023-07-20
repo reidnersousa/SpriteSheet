@@ -9,14 +9,14 @@ export class Garrafas {
     
 
     // ainda não ta usando 
-   let garrafa1 = garrafas_cenario.create(400, 300, 'bandeira');
-   garrafa1.setScale(0.1).refreshBody();
+   let garrafa1 = garrafas_cenario.create(480, 250, 'bandeira');
+   garrafa1.setScale(0.08).refreshBody();
    
-   let garrafa2 = garrafas_cenario.create(270, 300, 'bandeira');
-   garrafa2.setScale(0.1).refreshBody();
+   let garrafa2 = garrafas_cenario.create(15 ,165, 'bandeira');
+   garrafa2.setScale(0.08).refreshBody();
   
-    let garrafa3 = garrafas_cenario.create(500, 300, 'bandeira');
-    garrafa3.setScale(0.1).refreshBody();
+    let garrafa3 = garrafas_cenario.create(1000, 165, 'bandeira');
+    garrafa3.setScale(0.08).refreshBody();
  
    
 
