@@ -1,45 +1,32 @@
 // cenario/garrafas.js 
 import { coletarGarrafas } from '../funcoes/funcoes.js';
 
-
-
 export class Garrafas {
-  static createGarrafas(scene, personagem,vox,monstros) {
-    const garrafas_cenario = scene.physics.add.staticGroup();
-    
+  static createGarrafas(scene, personagem, vox, monstros) {
+    const garrafas_cenario = scene.physics.add.group(); // Change to physics group
 
-    // ainda não ta usando 
-   let garrafa1 = garrafas_cenario.create(480, 250, 'bandeira');
-   garrafa1.setScale(0.08).refreshBody();
-   
-   let garrafa2 = garrafas_cenario.create(15 ,165, 'bandeira');
-   garrafa2.setScale(0.08).refreshBody();
-  
-    let garrafa3 = garrafas_cenario.create(1000, 165, 'bandeira');
-    garrafa3.setScale(0.08).refreshBody();
- 
-   
+    let garrafa1 = scene.physics.add.sprite(20, 150, 'bandeira');
+    garrafa1.setScale(0.08);
+    garrafas_cenario.add(garrafa1); 
 
+    let garrafa2 = scene.physics.add.sprite(200, 150, 'bandeira');
+    garrafa2.setScale(0.08);
+    garrafas_cenario.add(garrafa2); 
+
+    let garrafa3 = scene.physics.add.sprite(830, 150, 'bandeira');
+    garrafa3.setScale(0.08);
+    garrafas_cenario.add(garrafa3); 
 
   
 
-   // scene.physics.add.collider(personagem, garrafas_cenario);
-    scene.physics.add.collider(vox, garrafas_cenario);
-
-    // Corrigir o nome da variável para garrafas_cenario
     scene.physics.add.overlap(personagem, garrafas_cenario, coletarGarrafas, null, scene);
 
+    // Enable gravity for each bottle in the group
+    garrafas_cenario.getChildren().forEach(garrafa => {
+      garrafa.body.setGravityY(300);
+    });
+
     return garrafas_cenario;
-    
   }
 }
 
-export default Garrafas;
-
-/*
- var pontuacao = 0;
-  var pontuacaoTextBandeira = this.add.text(16, 16, 'Pontuação: 0', { fontSize: '32px', fill: '#000' });
-  pontuacaoTextBandeira.setScrollFactor(0);
-  pontuacaoTextBandeira.setOrigin(0, 0);
-
-*/

@@ -15,7 +15,7 @@ export class Tempo {
       this.tempoTexto.destroy();
     }
     this.tempoTexto = this.scene.add.text(16, 16, 'Tempo: ' + this.elapsedTime, { fontSize: '32px', fill: '#000' });
-      console.log("Tempo decorrido:", this.elapsedTime, "segundos");
+     // console.log("Tempo decorrido:", this.elapsedTime, "segundos");
   }
 
   stop() {

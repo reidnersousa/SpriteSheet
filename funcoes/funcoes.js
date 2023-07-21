@@ -19,3 +19,21 @@ export function coletarGarrafas(personagem, bandeira  ,pontuacaoTextBandeira) {
     }
     bandeira.destroy();
   }
+
+
+var quantidadeTiros = 4;
+
+export function pegarMunicao(personagem, cartucho, pegouCartuchos) {
+  cartucho.disableBody(true, true); // Remover o cartucho do jogo
+  pegouCartuchos = true; // Definir pegouCartuchos como true
+  quantidadeTiros += 2; // Aumentar a quantidade de tiros em 2
+
+  //tem que arrumar a funcão de update das municoes
+  console.log("Municao coletado. Quantidade de tiros:", quantidadeTiros);
+
+  // Recarregar o cartucho
+  cartucho.enableBody(true, 700,380, true, true);
+  cartucho.setScale(0.05);
+
+  return quantidadeTiros,pegouCartuchos;
+}

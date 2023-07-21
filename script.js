@@ -5,6 +5,7 @@ import { Monstro } from './inimigos/monstro.js';
 
 import { Plataformas}  from './cenario/plataformas.js';
 import {Garrafas} from './cenario/garrafas.js';
+import {Municao} from './cenario/municao.js';
 import { coletarGarrafas } from './funcoes/funcoes.js';
 import { AnimationMonstro } from "./animation/animationMonstro.js";
 import { AnimationPersonagem } from "./animation/animationPersonagem.js";
@@ -111,7 +112,7 @@ function create() {
   
   const plataformas =Plataformas.createPlataformas(this, personagem,vox,this.monstros);
   const garrafas = Garrafas.createGarrafas(this,personagem,vox,this.monstros);
-
+  const municao = Municao.createMunicao(this,personagem);
  
   this.monstros.createMonstroCollide(plataformas,personagem,tiro);
   this.physics.add.collider(plataformas,garrafas);
@@ -156,57 +157,13 @@ function create() {
   
   
 
-  function coletarBandeira(personagem, bandeira) {
-    pontuacao += 100;
-    pontuacaoTextBandeira.setText('Pontuação: ' + pontuacao);
-  
-    if(pontuacao === 300){
-      this.scene.stop();
-      this.tempo.stop();
-      var seuTempo =this.tempo.obterDuracaoPercurso();
-      console.log("Seu tempo ",seuTempo);
-      
-      this.scene.add('Fase2', MyScene, true, { x: 400, y: 800 });
-      
-       
-    }
-    bandeira.destroy();
-  }
-
-  // Criação da bandeira
-  var bandeira = this.physics.add.staticImage(480, 250, 'bandeira');
-  bandeira.setScale(0.2); // Ajusta o tamanho da bandeira
-  bandeira.setScale(bandeira.scaleX * 0.2); // Diminui a escala atual em 5 vezes
-
-
-  // Define a posição e o tamanho da hitbox da bandeira
-  var hitboxWidth = bandeira.width * bandeira.scaleX;
-  var hitboxHeight = bandeira.height * bandeira.scaleY;
-  bandeira.body.setSize(hitboxWidth, hitboxHeight);
-  bandeira.body.setOffset((bandeira.width - hitboxWidth) / 2, (bandeira.height - hitboxHeight) / 2); // Ajusta a posição da   hitbox para que fique alinhada com a bandeira visualmente
-
-  // Adicione a colisão entre o personagem e a bandeira
-  this.physics.add.overlap(personagem, bandeira, coletarBandeira, null, this);
   
 
-  var bandeira1 = this.physics.add.staticImage(15, 165, 'bandeira');
-  bandeira1.setScale(0.2);
-  bandeira1.setScale(bandeira1.scaleX *0.2);
-  var hitboxWidth1 = bandeira1.width * bandeira1.scaleX;
-  var hitboxHeight1 = bandeira1.height * bandeira1.scaleY;
-  bandeira1.body.setSize(hitboxWidth1, hitboxHeight1);
-  bandeira1.body.setOffset((bandeira1.width - hitboxWidth1) / 2, (bandeira1.height - hitboxHeight1) / 2);
-  this.physics.add.overlap(personagem, bandeira1, coletarBandeira, null, this);
+
+  
 
 
-  var bandeira2 = this.physics.add.staticImage(1000, 165, 'bandeira');
-  bandeira2.setScale(0.2);
-  bandeira2.setScale(bandeira2.scaleX *0.2);
-  var hitboxWidth2 = bandeira2.width * bandeira2.scaleX;
-  var hitboxHeight2 = bandeira2.height * bandeira2.scaleY;
-  bandeira2.body.setSize(hitboxWidth2, hitboxHeight2);
-  bandeira2.body.setOffset((bandeira2.width - hitboxWidth2) / 2, (bandeira2.height - hitboxHeight2) / 2);
-  this.physics.add.overlap(personagem, bandeira2, coletarBandeira, null, this);
+
 
   this.cameras.main.startFollow(personagem);
   this.cameras.main.setZoom(0.8); // Define o zoom da câmera para 80% do tamanho original
@@ -384,7 +341,9 @@ function update() {
 
       quantidadeTiros--; // Reduzir a quantidade de tiros
       console.log("Quantidade de tiros restantes:", quantidadeTiros);
-    } else {
+    }// fim if 
+    
+    else {
       console.log("Sem munição. Recarregue para atirar novamente.");
     }
   }
@@ -401,7 +360,9 @@ function update() {
 
 
   this.physics.overlap(personagem, this.meteoros, colidirMeteoro, null, this);
-}
+} // update fim
+
+
 function pegarCartucho(personagem, cartucho) {
  
   cartucho.disableBody(true, true); // Remover o cartucho do jogo
