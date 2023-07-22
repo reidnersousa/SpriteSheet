@@ -3,6 +3,8 @@ import { coletarGarrafas } from '../funcoes/funcoes.js';
 
 export class Garrafas {
 
+ 
+
   static createGarrafas(scene, personagem, vox, monstros, pontuacaoTextBandeira) { 
     const garrafas_cenario = scene.physics.add.group(); // Change to physics group
 
@@ -37,10 +39,12 @@ export class Garrafas {
 
 
   
-    
-     scene.physics.add.overlap(personagem, garrafas_cenario, function (personagem, bandeira) {
-      coletarGarrafas(personagem, bandeira, pontuacaoTextBandeira); // Passando pontuacaoTextBandeira para coletarGarrafas
-    }, null, scene);
+     scene.physics.add.overlap(personagem, garrafas_cenario, (personagem, bandeira) => {
+      coletarGarrafas.call(scene, personagem, bandeira, pontuacaoTextBandeira);
+    });
+     
+
+   
     
     // Enable gravity for each bottle in the group
     garrafas_cenario.getChildren().forEach(garrafa => {

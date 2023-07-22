@@ -11,7 +11,7 @@ export function coletarGarrafas(personagem, bandeira  ,pontuacaoTextBandeira) {
     pontuacaoTextBandeira.setText('Pontuação: ' + pontuacao);
     console.log("ColetaGarrfas");
     console.log(pontuacao);
-    if(pontuacao === 1000){
+    if(pontuacao === 700){
         console.log("Garrafas");
         //this.scene.start('Fase2');
        this.scene.add('Fase2', MyScene, true, { x: 400, y: 800 });
