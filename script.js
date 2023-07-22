@@ -108,11 +108,17 @@ function create() {
 
   this.physics.add.collider(tiro,vox);
   
- 
+ var pontuacao = 0;
+  var pontuacaoTextBandeira = this.add.text(16, 16, 'Pontuação: 0', { fontSize: '32px', fill: '#000' });
+  pontuacaoTextBandeira.setScrollFactor(0);
+  pontuacaoTextBandeira.setOrigin(0, 0);
+  textoVidas = this.add.text(16, 48, 'Vidas: ' + vidas, { fontSize: '32px', fill: '#000' }); // Ajuste as coordenadas Y para 48
+  textoVidas.setScrollFactor(0);
+  textoVidas.setOrigin(0, 0);
   
   const plataformas =Plataformas.createPlataformas(this, personagem,vox,this.monstros);
-  const garrafas = Garrafas.createGarrafas(this,personagem,vox,this.monstros);
-  const municao = Municao.createMunicao(this,personagem);
+  const garrafas = Garrafas.createGarrafas(this,personagem,vox,this.monstros ,pontuacaoTextBandeira);
+ // const municao = Municao.createMunicao(this,personagem);
  
   this.monstros.createMonstroCollide(plataformas,personagem,tiro);
   this.physics.add.collider(plataformas,garrafas);
@@ -134,10 +140,11 @@ function create() {
   this.personagem = personagem;
   this.vox = vox;
 
-  this.cartucho = this.physics.add.image(270, 321, 'cartucho');
+  this.cartucho = this.physics.add.image(570, 373, 'cartucho');
   this.cartucho.setCollideWorldBounds(true);
   this.cartucho.setScale(0.05);
   this.physics.add.collider(plataformas,this.cartucho);
+  this.physics.add.collider(personagem,this.cartucho);
 
  
   
@@ -146,13 +153,7 @@ function create() {
   this.physics.add.collider(this.personagem,this.monstros);
   
   
-  var pontuacao = 0;
-  var pontuacaoTextBandeira = this.add.text(16, 16, 'Pontuação: 0', { fontSize: '32px', fill: '#000' });
-  pontuacaoTextBandeira.setScrollFactor(0);
-  pontuacaoTextBandeira.setOrigin(0, 0);
-  textoVidas = this.add.text(16, 48, 'Vidas: ' + vidas, { fontSize: '32px', fill: '#000' }); // Ajuste as coordenadas Y para 48
-  textoVidas.setScrollFactor(0);
-  textoVidas.setOrigin(0, 0);
+  
 
   
   
